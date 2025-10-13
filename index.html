@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VikPath - Empowering Minds</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-dark-green: #2E6F40;
+            --secondary-text: #34495e;
+            --title-black: #333333; /* Updated to neutral dark grey */
+            --background-color: #f4f6f8;
+            --panel-bg-color: #ffffff;
+            --heading-font: 'Bangers', cursive;
+            --body-font: 'Lato', sans-serif;
+        }
+
+        /* General Body Styling */
+        body {
+            font-family: var(--body-font);
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--secondary-text);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header and Navigation */
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: var(--primary-dark-green);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .site-title {
+            font-family: 'Lato', sans-serif;
+            font-size: 2.5em;
+            color: white;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .main-nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+        }
+
+        .main-nav li { margin-left: 25px; }
+
+        .main-nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 8px 12px;
+            border-radius: 6px;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #fff;
+            transition: width .3s ease;
+        }
+        
+        .main-nav a:hover::after {
+            width: 100%;
+            left: 0;
+            background-color: #fff;
+        }
+
+        /* Content Panel Styling */
+        .content-panel {
+            background-color: var(--panel-bg-color);
+            border: 3px solid var(--title-black); /* Updated border color */
+            padding: 35px 40px;
+            margin-top: 40px;
+            border-radius: 8px;
+            box-shadow: 5px 5px 0px #bdc3c7;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .content-panel.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .formal-title {
+             font-family: 'Lato', sans-serif;
+             font-weight: 900;
+             font-size: 2.2em;
+             letter-spacing: 1px;
+             color: var(--title-black);
+             text-align: center;
+             margin-bottom: 30px;
+        }
+        
+        /* Two-Column Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .grid-item {
+            background-color: var(--panel-bg-color);
+            border: 3px solid var(--title-black); /* Updated border color */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 5px 5px 0px #bdc3c7;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .grid-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Why VikPath Section */
+        .why-us-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            text-align: center;
+        }
+        
+        .why-us-item {
+            padding: 20px;
+        }
+        
+        .why-us-item i {
+            font-size: 3em;
+            color: var(--primary-dark-green);
+        }
+        
+        .why-us-item h3 {
+            font-weight: 700;
+            font-size: 1.3em;
+            color: var(--title-black);
+        }
+
+        /* Resources List */
+        .resources-list {
+            list-style: none;
+            padding: 0;
+            column-count: 2;
+            column-gap: 30px;
+        }
+        
+        .resources-list li {
+            padding-left: 1.5em;
+            text-indent: -1.5em;
+            margin-bottom: 12px;
+            font-size: 1.05em;
+            break-inside: avoid-column;
+        }
+
+        .resources-list li::before {
+            content: '✔';
+            color: var(--primary-dark-green);
+            margin-right: 10px;
+        }
+
+        /* Testimonials Section */
+        .testimonial {
+            font-size: 1.1em;
+            font-style: italic;
+            border-left: 4px solid var(--primary-dark-green);
+            padding-left: 20px;
+            margin: 0;
+        }
+        
+        .testimonial-author {
+            text-align: right;
+            font-weight: bold;
+            font-style: normal;
+            margin-top: 10px;
+        }
+        
+        /* Social Media Buttons */
+        .social-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            background-color: var(--primary-dark-green);
+            font-weight: bold;
+            padding: 14px 30px;
+            border-radius: 30px;
+            margin: 5px 10px;
+            font-size: 1.1em;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            border: none;
+            box-shadow: 0 4px 15px rgba(46, 111, 64, 0.3);
+            text-align: center;
+        }
+        
+        .social-btn:hover {
+            background-color: #245833;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 111, 64, 0.4);
+        }
+        
+        .social-btn i { margin-right: 8px; }
+        
+        /* Footer */
+        .site-footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            background-color: #34495e;
+            color: #ccc;
+        }
+        .site-footer p { margin: 5px 0; color: #fff; }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .grid-container, .why-us-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .site-header {
+                flex-direction: column;
+                padding: 20px 15px;
+            }
+            .site-title { margin-bottom: 15px; }
+            .main-nav ul { justify-content: center; width: 100%; }
+            .main-nav li { margin: 5px 10px; }
+            .resources-list { column-count: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="site-header">
+        <a href="#" class="logo-container">
+            <h1 class="site-title">VikPath</h1>
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#join">Join Us</a></li>
+                <li><a href="https://vikpath.blogspot.com" target="_blank">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- About Section (Full Width) -->
+        <section id="about" class="content-panel">
+            <h2 class="formal-title">Our Mission</h2>
+            <p><strong>Welcome to VikPath.</strong> We are a student-run community dedicated to a simple, powerful goal: to empower students by providing reliable, peer-driven support and resources. We believe that shared experience is the most effective tool for academic and professional growth.</p>
+            <p>Whether you seek curated study notes, practical career advice, or authentic university insights, VikPath is your trusted platform for navigating your educational journey with clarity and confidence.</p>
+        </section>
+        
+        <!-- Why Us Section (Full Width) -->
+        <section id="why-us" class="content-panel">
+            <h2 class="formal-title">Why Choose VikPath?</h2>
+            <div class="why-us-container">
+                <div class="why-us-item">
+                    <i class="fas fa-users"></i>
+                    <h3>By Students, For Students</h3>
+                    <p>Get authentic advice and resources from peers who understand the journey.</p>
+                </div>
+                <div class="why-us-item">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Practical Guidance</h3>
+                    <p>We focus on real-world insights that help you succeed in and out of the classroom.</p>
+                </div>
+                <div class="why-us-item">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Community Driven</h3>
+                    <p>Join a supportive network where collaboration and mutual growth are top priorities.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Start of 2-Column Layout -->
+        <div class="grid-container">
+            <!-- Resources Section (Left Column) -->
+            <div id="resources" class="grid-item">
+                <h2 class="formal-title">Our Resources</h2>
+                <ul class="resources-list">
+                    <li>Curated Notes & Study Materials</li>
+                    <li>Educational System Guides</li>
+                    <li>Honest Book Reviews</li>
+                    <li>Academic News & Updates</li>
+                    <li>Practical Career Advice</li>
+                    <li>In-Depth University Details</li>
+                    <li>Skill Development Workshops</li>
+                    <li>Internship & Opportunity Alerts</li>
+                    <li>Exam Preparation Strategies</li>
+                    <li>Mental Health & Wellness Tips</li>
+                </ul>
+            </div>
+
+            <!-- Join Us Section (Right Column) -->
+            <div id="join" class="grid-item">
+                <h2 class="formal-title">Become a Contributor</h2>
+                <p>VikPath's impact is driven by its dedicated student contributors. Join our team to gain valuable experience, enhance your resume, and help fellow students.</p>
+                <p>We are currently seeking applicants for:</p>
+                <ul>
+                    <li><strong>Content Authors</strong></li>
+                    <li><strong>Community Managers (Telegram)</strong></li>
+                    <li><strong>Social Media Coordinators</strong></li>
+                </ul>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://forms.gle/mWjYX6FDQBwXkVYEA" class="social-btn" target="_blank"><i class="fab fa-wpforms"></i> Apply Here</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Testimonials Section (Full Width) -->
+        <section id="testimonials" class="content-panel">
+            <h2 class="formal-title">Community Spotlight</h2>
+            <blockquote class="testimonial">
+                "It is our choices, Harry, that show what we truly are, far more than our abilities."
+                <p class="testimonial-author">- Albus Dumbledore, Harry Potter</p>
+            </blockquote>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="site-footer">
+        <p>VikPath | Empowering Minds</p>
+        <p>&copy; 2025 VikPath Community. All rights reserved.</p>
+    </footer>
+    
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- Animation Script -->
+    <script>
+        const animatedItems = document.querySelectorAll('.content-panel, .grid-item');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        animatedItems.forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+
+</body>
+</html>
+
