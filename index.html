@@ -52,6 +52,10 @@
             transition: top 0.4s ease-in-out; /* Animation for hiding/showing */
         }
 
+        .logo-container {
+            text-decoration: none; /* Removes the underline from the logo link */
+        }
+
         .site-title {
             font-family: 'Lato', sans-serif;
             font-size: 2.5em;
@@ -97,6 +101,11 @@
             width: 100%;
             left: 0;
             background-color: #fff;
+        }
+
+        /* Remove default focus outline */
+        .main-nav a:focus, .social-btn:focus, .back-to-top:focus {
+            outline: none;
         }
 
         /* Content Panel Styling */
@@ -478,4 +487,5 @@
 
 </body>
 </html>
+
 
