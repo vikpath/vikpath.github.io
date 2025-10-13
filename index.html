@@ -49,6 +49,7 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: top 0.4s ease-in-out; /* Animation for hiding/showing */
         }
 
         .site-title {
@@ -237,7 +238,7 @@
             background-color: var(--primary-dark-green);
             font-weight: bold;
             padding: 14px 30px;
-            border-radius: 8px; /* Changed from 30px */
+            border-radius: 8px;
             margin: 5px 10px;
             font-size: 1.1em;
             transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
@@ -263,7 +264,7 @@
             color: white;
             width: 50px;
             height: 50px;
-            border-radius: 8px; /* Changed from 50% */
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -305,11 +306,23 @@
         @media (max-width: 768px) {
             .site-header {
                 flex-direction: column;
-                padding: 20px 15px;
+                padding: 15px; /* Reduced padding */
             }
-            .site-title { margin-bottom: 15px; }
-            .main-nav ul { justify-content: center; width: 100%; }
-            .main-nav li { margin: 5px 10px; }
+            .site-title {
+                font-size: 2em; /* Reduced font size */
+                margin-bottom: 15px;
+            }
+            .main-nav ul {
+                justify-content: center;
+                width: 100%;
+            }
+            .main-nav li {
+                margin: 0 5px; /* Reduced margin */
+            }
+            .main-nav a {
+                font-size: 1em; /* Reduced font size */
+                padding: 8px;
+            }
         }
     </style>
 </head>
@@ -401,8 +414,8 @@
         <section id="testimonials" class="content-panel">
             <h2 class="formal-title">Community Spotlight</h2>
             <blockquote class="testimonial">
-                "It is our choices, Harry, that show what we truly are, far more than our abilities."
-                <p class="testimonial-author">- Albus Dumbledore, Harry Potter</p>
+                "The future belongs to those who believe in the beauty of their dreams."
+                <p class="testimonial-author">- Shoyo Hinata, Haikyuu!!</p>
             </blockquote>
         </section>
 
@@ -446,9 +459,23 @@
                 backToTopButton.classList.remove('visible');
             }
         });
+        
+        // Hide header on scroll down, show on scroll up
+        let lastScrollTop = 0;
+        const header = document.querySelector('.site-header');
+        window.addEventListener("scroll", function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+                // Scroll Down
+                header.style.top = `-${header.offsetHeight}px`;
+            } else {
+                // Scroll Up
+                header.style.top = "0";
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
     </script>
 
 </body>
 </html>
-
 
