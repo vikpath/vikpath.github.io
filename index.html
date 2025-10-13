@@ -12,7 +12,7 @@
         :root {
             --primary-dark-green: #2E6F40;
             --secondary-text: #34495e;
-            --title-black: #333333; /* Updated to neutral dark grey */
+            --title-black: #333333;
             --background-color: #f4f6f8;
             --panel-bg-color: #ffffff;
             --heading-font: 'Bangers', cursive;
@@ -20,6 +20,10 @@
         }
 
         /* General Body Styling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: var(--body-font);
             margin: 0;
@@ -95,22 +99,32 @@
         }
 
         /* Content Panel Styling */
-        .content-panel {
+        .content-panel, .grid-item {
             background-color: var(--panel-bg-color);
-            border: 3px solid var(--title-black); /* Updated border color */
+            border: 3px solid var(--title-black);
             padding: 35px 40px;
             margin-top: 40px;
             border-radius: 8px;
             box-shadow: 5px 5px 0px #bdc3c7;
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
         }
         
-        .content-panel.is-visible {
+        .content-panel.is-visible, .grid-item.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        .content-panel:hover, .grid-item:hover {
+            transform: translateY(0) rotate(-1.5deg);
+            box-shadow: 10px 10px 0px var(--primary-dark-green);
+        }
+        
+        .grid-container .grid-item:nth-child(even):hover {
+            transform: translateY(0) rotate(1.5deg);
+        }
+
 
         .formal-title {
              font-family: 'Lato', sans-serif;
@@ -130,22 +144,6 @@
             margin-top: 40px;
         }
         
-        .grid-item {
-            background-color: var(--panel-bg-color);
-            border: 3px solid var(--title-black); /* Updated border color */
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 5px 5px 0px #bdc3c7;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .grid-item.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         /* Why VikPath Section */
         .why-us-container {
             display: grid;
@@ -156,6 +154,13 @@
         
         .why-us-item {
             padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .why-us-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         
         .why-us-item i {
@@ -169,26 +174,43 @@
             color: var(--title-black);
         }
 
-        /* Resources List */
-        .resources-list {
+        /* Resources & Contributor List Styling */
+        .resources-list, .contributor-list {
             list-style: none;
             padding: 0;
-            column-count: 2;
-            column-gap: 30px;
         }
         
-        .resources-list li {
-            padding-left: 1.5em;
-            text-indent: -1.5em;
-            margin-bottom: 12px;
-            font-size: 1.05em;
-            break-inside: avoid-column;
+        .resources-list li, .contributor-list li {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease, color 0.3s ease;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .resources-list li::before, .contributor-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-dark-green);
+            font-weight: bold;
+            font-size: 1.5em;
+            line-height: 1.1em;
         }
 
-        .resources-list li::before {
-            content: '✔';
+        .resources-list li:hover, .contributor-list li:hover {
+            transform: translateX(10px);
             color: var(--primary-dark-green);
-            margin-right: 10px;
+        }
+
+        .resources-list li i, .contributor-list li i {
+            color: var(--primary-dark-green);
+            margin-left: 10px;
+            margin-right: 15px;
+            width: 25px;
+            text-align: center;
         }
 
         /* Testimonials Section */
@@ -215,7 +237,7 @@
             background-color: var(--primary-dark-green);
             font-weight: bold;
             padding: 14px 30px;
-            border-radius: 30px;
+            border-radius: 8px; /* Changed from 30px */
             margin: 5px 10px;
             font-size: 1.1em;
             transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
@@ -231,6 +253,37 @@
         }
         
         .social-btn i { margin-right: 8px; }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-dark-green);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 8px; /* Changed from 50% */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s, visibility 0.4s, background-color 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: #245833;
+        }
         
         /* Footer */
         .site-footer {
@@ -257,7 +310,6 @@
             .site-title { margin-bottom: 15px; }
             .main-nav ul { justify-content: center; width: 100%; }
             .main-nav li { margin: 5px 10px; }
-            .resources-list { column-count: 1; }
         }
     </style>
 </head>
@@ -316,16 +368,16 @@
             <div id="resources" class="grid-item">
                 <h2 class="formal-title">Our Resources</h2>
                 <ul class="resources-list">
-                    <li>Curated Notes & Study Materials</li>
-                    <li>Educational System Guides</li>
-                    <li>Honest Book Reviews</li>
-                    <li>Academic News & Updates</li>
-                    <li>Practical Career Advice</li>
-                    <li>In-Depth University Details</li>
-                    <li>Skill Development Workshops</li>
-                    <li>Internship & Opportunity Alerts</li>
-                    <li>Exam Preparation Strategies</li>
-                    <li>Mental Health & Wellness Tips</li>
+                    <li><i class="fas fa-book-open"></i> Curated Notes & Study Materials</li>
+                    <li><i class="fas fa-sitemap"></i> Educational System Guides</li>
+                    <li><i class="fas fa-feather-alt"></i> Honest Book Reviews</li>
+                    <li><i class="fas fa-newspaper"></i> Academic News & Updates</li>
+                    <li><i class="fas fa-briefcase"></i> Practical Career Advice</li>
+                    <li><i class="fas fa-university"></i> In-Depth University Details</li>
+                    <li><i class="fas fa-cogs"></i> Skill Development Workshops</li>
+                    <li><i class="fas fa-bullhorn"></i> Opportunity Alerts</li>
+                    <li><i class="fas fa-tasks"></i> Exam Preparation Strategies</li>
+                    <li><i class="fas fa-heartbeat"></i> Mental Health & Wellness Tips</li>
                 </ul>
             </div>
 
@@ -334,10 +386,10 @@
                 <h2 class="formal-title">Become a Contributor</h2>
                 <p>VikPath's impact is driven by its dedicated student contributors. Join our team to gain valuable experience, enhance your resume, and help fellow students.</p>
                 <p>We are currently seeking applicants for:</p>
-                <ul>
-                    <li><strong>Content Authors</strong></li>
-                    <li><strong>Community Managers (Telegram)</strong></li>
-                    <li><strong>Social Media Coordinators</strong></li>
+                <ul class="contributor-list">
+                    <li><i class="fas fa-pen-nib"></i><strong>Content Authors</strong></li>
+                    <li><i class="fab fa-telegram-plane"></i><strong>Community Managers</strong></li>
+                    <li><i class="fas fa-share-alt"></i><strong>Social Media Coordinators</strong></li>
                 </ul>
                 <div style="text-align: center; margin-top: 20px;">
                     <a href="https://forms.gle/mWjYX6FDQBwXkVYEA" class="social-btn" target="_blank"><i class="fab fa-wpforms"></i> Apply Here</a>
@@ -355,6 +407,9 @@
         </section>
 
     </main>
+    
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
     <!-- Footer Section -->
     <footer class="site-footer">
@@ -365,10 +420,10 @@
     <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     
-    <!-- Animation Script -->
+    <!-- Animation & Interaction Script -->
     <script>
+        // Scroll Animation for panels
         const animatedItems = document.querySelectorAll('.content-panel, .grid-item');
-
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -378,12 +433,22 @@
         }, {
             threshold: 0.1
         });
-
         animatedItems.forEach(item => {
             observer.observe(item);
+        });
+
+        // Back to Top Button Logic
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
         });
     </script>
 
 </body>
 </html>
+
 
