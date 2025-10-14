@@ -43,10 +43,9 @@
         /* Diagonal Section Styling */
         section {
             padding: 120px 0;
+            position: relative;
             margin-top: -80px;
             margin-bottom: -80px;
-            border-bottom: 6px solid var(--title-black);
-            position: relative;
         }
         
         .section-content {
@@ -71,6 +70,7 @@
              transform: skewY(-3deg);
         }
 
+
         /* Header and Navigation */
         .site-header {
             display: flex;
@@ -83,7 +83,7 @@
             z-index: 1000;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             transition: top 0.4s ease-in-out;
-            border-bottom: 6px solid var(--title-black);
+            border-bottom: 4px solid var(--title-black);
         }
 
         .site-title {
@@ -147,6 +147,7 @@
             color: var(--title-black);
             margin: 0 0 20px 0;
             line-height: 1;
+            animation: title-pop-in 1s ease-out 0.2s backwards;
         }
         
         .hero-subtitle {
@@ -173,12 +174,6 @@
             color: var(--primary-blue);
             opacity: 0.1;
             animation: float 20s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { opacity: 0.15; }
-            100% { transform: translateY(-1200px) rotate(360deg); }
         }
 
         #about {
@@ -225,6 +220,14 @@
              color: var(--title-black);
              text-align: center;
              margin-bottom: 60px;
+             opacity: 0;
+             transform: translateY(30px);
+             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section-title.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Comic Style Cards */
@@ -240,7 +243,7 @@
             border-radius: 12px;
             padding: 40px;
             box-shadow: 8px 8px 0px var(--title-black);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-align: center;
             opacity: 0;
             transform: translateY(30px) rotate(-2deg);
@@ -279,6 +282,11 @@
             font-size: 3rem;
             color: var(--primary-blue);
             margin-bottom: 25px;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .card:hover .card-icon {
+            animation: icon-bounce 0.6s ease-in-out;
         }
         
         .card-title {
@@ -337,9 +345,40 @@
             padding: 60px 20px 30px 20px;
             background-color: var(--title-black);
             color: #aab8c2;
-            margin-top: -80px;
             position: relative;
             z-index: 10;
+        }
+        
+        .footer-title {
+            color: white;
+            font-family: var(--comic-font);
+            font-size: 2rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .footer-social-links {
+            margin-bottom: 30px;
+        }
+
+        .footer-social-links a {
+            color: #aab8c2;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+            transition: color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 700;
+        }
+        
+        .footer-social-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .footer-social-links i {
+            margin-right: 8px;
+            font-size: 1.2em;
         }
         
         .footer-link-list {
@@ -358,7 +397,7 @@
         .footer-link-list a {
             color: #aab8c2;
             text-decoration: none;
-            font-size: 1.1em;
+            font-size: 1em;
             transition: color 0.3s;
             font-weight: 700;
         }
@@ -407,6 +446,25 @@
             transform: scale(1.1) rotate(360deg);
         }
 
+        /* Animation Keyframes */
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { opacity: 0.15; }
+            100% { transform: translateY(-1200px) rotate(360deg); }
+        }
+        
+        @keyframes title-pop-in {
+            0% { transform: scale(0.5); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            80% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes icon-bounce {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-10px) rotate(15deg); }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .site-header {
@@ -418,7 +476,8 @@
             .main-nav li { margin: 0 10px; }
             .hero-title { font-size: 3.5rem; }
             .section-title { font-size: 2.8rem; }
-            .footer-link-list { flex-direction: column; }
+            .footer-link-list, .footer-social-links { flex-direction: column; }
+            .footer-social-links a { margin-bottom: 10px; }
         }
     </style>
 </head>
@@ -541,7 +600,7 @@
                 <h2 class="section-title">Join Our Community</h2>
                 <div style="max-width: 700px; margin: 0 auto; text-align: center;">
                     <p style="font-size: 1.2rem; font-weight: 700;">Connect with fellow students, ask questions, and get support in our official Telegram group. This is the heart of the VikPath community!</p>
-                    <a href="https://t.me/vikpathgroup" class="cta-button" target="_blank"><i class="fab fa-telegram-plane"></i> Join Telegram Group</a>
+                    <a href="https://t.me/VikPathTalks" class="cta-button" target="_blank"><i class="fab fa-telegram-plane"></i> Join Telegram Group</a>
                 </div>
             </div>
         </section>
@@ -570,6 +629,11 @@
     <!-- Footer Section -->
     <footer class="site-footer">
         <div class="container">
+            <h3 class="footer-title">Follow Us</h3>
+            <div class="footer-social-links">
+                <a href="https://t.me/VikPath" target="_blank"><i class="fab fa-telegram-plane"></i>Telegram Channel</a>
+                <a href="https://t.me/VikPathTalks" target="_blank"><i class="fas fa-users"></i>Telegram Group</a>
+            </div>
             <ul class="footer-link-list">
                 <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdvWfTELeL4oVDl8f6fFuruYHrKPEk-Cog7CQGGOK77zLnnsg/viewform" target="_blank">Contact Us</a></li>
                 <li><a href="https://vikpath.blogspot.com/p/about-us.html" target="_blank">About Us</a></li>
@@ -585,8 +649,8 @@
     
     <!-- Animation & Interaction Script -->
     <script>
-        // Scroll Animation for cards
-        const animatedItems = document.querySelectorAll('.card');
+        // Scroll Animation for cards and titles
+        const animatedItems = document.querySelectorAll('.card, .section-title');
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
