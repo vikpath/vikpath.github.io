@@ -168,11 +168,6 @@
         }
 
         /* Hero Section */
-        .hero {
-            background: var(--accent-yellow);
-            text-align: center;
-        }
-        
         .hero-title {
             font-family: var(--comic-font);
             font-size: 5rem;
@@ -181,14 +176,6 @@
             margin: 0 0 20px 0;
             line-height: 1;
             animation: title-pop-in 1s ease-out 0.2s backwards;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.25rem;
-            font-weight: 700;
-            max-width: 600px;
-            margin: 0 auto 40px auto;
-            color: var(--title-black);
         }
         
         /* Section Specific Backgrounds & Effects */
@@ -201,49 +188,27 @@
             overflow: hidden;
             z-index: 1;
         }
-
-        .background-elements i {
-            position: absolute;
-            color: var(--primary-blue);
-            opacity: 0.1;
-            animation: float 20s infinite linear;
-        }
-
-        #about {
-            background-color: var(--section-bg-about);
-            background-image: radial-gradient(var(--title-black) 1px, transparent 1px);
-            background-size: 15px 15px;
-            background-position: -7px -7px;
-        }
+        
+        #home-hero { background-color: var(--accent-yellow); text-align: center; }
+        #about { background-color: var(--section-bg-about); }
+        #contribute { background-color: var(--section-bg-contribute); }
         #resources { background-color: var(--section-bg-resources); }
         #join { background-color: var(--section-bg-join); }
-        #contribute {
-            background-color: var(--section-bg-contribute);
+
+        /* Manga Style Backgrounds */
+        .manga-speed-lines {
+            background-image: repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0.05) 0, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 10px);
+        }
+        
+        .manga-sunburst {
+            background-image: repeating-conic-gradient(rgba(0,0,0,0.05) 0% 1%, transparent 1% 5%);
+        }
+
+        .halftone-dots {
             background-image: radial-gradient(var(--title-black) 1px, transparent 1px);
             background-size: 15px 15px;
             background-position: -7px -7px;
         }
-
-        /* Thematic background icons */
-        .resources-bg i { color: var(--primary-blue); opacity: 0.08; }
-        .resources-bg i:nth-child(1) { top: 10%; left: 5%; font-size: 4rem; animation-duration: 22s; }
-        .resources-bg i:nth-child(2) { top: 20%; left: 85%; font-size: 5rem; animation-duration: 25s; }
-        .resources-bg i:nth-child(3) { top: 70%; left: 10%; font-size: 6rem; animation-duration: 20s; }
-        .resources-bg i:nth-child(4) { top: 80%; left: 90%; font-size: 4.5rem; animation-duration: 28s; }
-        .resources-bg i:nth-child(5) { top: 40%; left: 45%; font-size: 5.5rem; animation-duration: 18s; }
-        
-        .join-bg i { color: var(--dark-blue); opacity: 0.1; }
-        .join-bg i:nth-child(1) { top: 15%; left: 8%; font-size: 5rem; animation-duration: 13s; }
-        .join-bg i:nth-child(2) { top: 25%; left: 88%; font-size: 6rem; animation-duration: 16s; }
-        .join-bg i:nth-child(3) { top: 75%; left: 12%; font-size: 7rem; animation-duration: 11s; }
-        .join-bg i:nth-child(4) { top: 85%; left: 92%; font-size: 5.5rem; animation-duration: 19s; }
-
-        .contribute-bg i { color: var(--accent-red); opacity: 0.1; }
-        .contribute-bg i:nth-child(1) { top: 10%; left: 15%; font-size: 4rem; animation-duration: 14s; }
-        .contribute-bg i:nth-child(2) { top: 30%; left: 80%; font-size: 5rem; animation-duration: 17s; }
-        .contribute-bg i:nth-child(3) { top: 60%; left: 20%; font-size: 6rem; animation-duration: 12s; }
-        .contribute-bg i:nth-child(4) { top: 80%; left: 85%; font-size: 4.5rem; animation-duration: 21s; }
-
 
         /* Section Titles */
         .section-title {
@@ -334,12 +299,13 @@
             list-style: none;
             padding: 0;
             text-align: left;
+            font-size: 0.95em;
         }
 
         .card-list li {
             padding-left: 1.8em;
             text-indent: -1.8em;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         
         .card-list li::before {
@@ -480,12 +446,6 @@
         }
 
         /* Animation Keyframes */
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { opacity: 0.15; }
-            100% { transform: translateY(-1200px) rotate(360deg); }
-        }
-        
         @keyframes title-pop-in {
             0% { transform: scale(0.5); opacity: 0; }
             60% { transform: scale(1.1); opacity: 1; }
@@ -567,22 +527,22 @@
         <nav class="main-nav">
             <ul>
                 <li><a href="#about">About</a></li>
+                <li><a href="#contribute">Contribute</a></li>
                 <li><a href="#resources">Resources</a></li>
                 <li><a href="#join">Join</a></li>
-                <li><a href="#contribute">Contribute</a></li>
-                <li><a href="https://vikpath.blogspot.com" target="_blank">Blog</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
-        <section class="hero">
+        <!-- Home Hero Section -->
+        <section id="home-hero">
+            <div class="background-elements manga-speed-lines"></div>
             <div class="section-content">
                 <h1 class="hero-title">Your Adventure Awaits!</h1>
-                <p class="hero-subtitle">The ultimate student-powered guide for crushing your goals and navigating your educational journey!</p>
-                <a href="#about" class="cta-button">Start Here!</a>
+                <p style="font-size: 1.2rem; font-weight: 700; max-width: 700px; margin: 0 auto 40px auto;">VikPath is an educational community for students to help each other. It's a site made by students, for students, and managed by the public (students).</p>
+                <a href="https://vikpath.blogspot.com" class="cta-button" target="_blank">Explore Our Blog!</a>
             </div>
         </section>
 
@@ -615,15 +575,56 @@
                 </div>
             </div>
         </section>
-
+        
+        <section id="contribute">
+             <div class="background-elements halftone-dots"></div>
+             <div class="section-content">
+                <h2 class="section-title">Contributor Roles</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-icon"><i class="fas fa-pen-fancy"></i></div>
+                            <h3 class="card-title">Author</h3>
+                            <ul class="card-list">
+                                <li>Journal/Notes/Guidance</li>
+                                <li>Assignments/PYQs</li>
+                                <li>Awareness/Mental Health</li>
+                                <li>Book Reviews/Courses</li>
+                                <li>University/Exam Guides</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card">
+                         <div class="card-content">
+                            <div class="card-icon"><i class="fas fa-share-alt"></i></div>
+                            <h3 class="card-title">Social Media Handler</h3>
+                            <ul class="card-list">
+                                <li>Telegram Management</li>
+                                <li>Twitter Engagement</li>
+                                <li>Content Promotion</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card">
+                         <div class="card-content">
+                            <div class="card-icon"><i class="fas fa-user-friends"></i></div>
+                            <h3 class="card-title">Career Adviser</h3>
+                            <ul class="card-list">
+                                <li>Peer-to-Peer Counselling</li>
+                                <li>Guidance from Experience</li>
+                                <li>(Unprofessional & Voluntary)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 50px;">
+                    <a href="https://forms.gle/mWjYX6FDQBwXkVYEA" class="cta-button" target="_blank"><i class="fab fa-wpforms"></i> Apply Here!</a>
+                </div>
+            </div>
+        </section>
+        
         <section id="resources">
-             <div class="background-elements resources-bg">
-                <i class="fas fa-book-open"></i>
-                <i class="fas fa-graduation-cap"></i>
-                <i class="fas fa-lightbulb"></i>
-                <i class="fas fa-book-open"></i>
-                <i class="fas fa-graduation-cap"></i>
-             </div>
+             <div class="background-elements"></div>
              <div class="section-content">
                 <h2 class="section-title">Our Super Resources</h2>
                 <div class="card-grid">
@@ -668,12 +669,7 @@
         </section>
 
         <section id="join">
-            <div class="background-elements join-bg">
-                <i class="fas fa-comments"></i>
-                <i class="fas fa-comment-dots"></i>
-                <i class="fas fa-comments"></i>
-                <i class="fas fa-comment-dots"></i>
-            </div>
+            <div class="background-elements manga-sunburst"></div>
             <div class="section-content">
                 <h2 class="section-title">Join Our Community</h2>
                 <div style="max-width: 700px; margin: 0 auto; text-align: center;">
@@ -682,23 +678,7 @@
                 </div>
             </div>
         </section>
-
-        <section id="contribute">
-            <div class="background-elements contribute-bg">
-                <i class="fas fa-pencil-alt"></i>
-                <i class="fas fa-bullhorn"></i>
-                <i class="fas fa-pencil-alt"></i>
-                <i class="fas fa-bullhorn"></i>
-            </div>
-            <div class="section-content">
-                <h2 class="section-title">Become a Contributor!</h2>
-                <div style="max-width: 700px; margin: 0 auto; text-align: center;">
-                    <p style="font-size: 1.2rem; font-weight: 700;">VikPath's impact is driven by its dedicated student contributors. Join our team to gain valuable experience, enhance your resume, and give back to the student community.</p>
-                    <a href="https://forms.gle/mWjYX6FDQBwXkVYEA" class="cta-button" target="_blank"><i class="fab fa-wpforms"></i> Apply Here!</a>
-                </div>
-            </div>
-        </section>
-
+        
     </main>
     
     <!-- Back to Top Button -->
