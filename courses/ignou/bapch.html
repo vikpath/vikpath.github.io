@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate B.A. (Honours) Psychology (BAPCH) Guide - VikPath</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-blue: #0077b6;
+            --dark-blue: #023e8a;
+            --accent-yellow: #ffc300;
+            --accent-red: #e74c3c;
+            --neutral-text: #333;
+            --title-black: #212529;
+            --background-light: #f8fafc; /* slate-50 */
+            --comic-font: 'Bangers', cursive;
+            --body-font: 'Lato', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--body-font); background-color: var(--background-light); color: var(--neutral-text); }
+        
+        /* VikPath Header Styles */
+        .site-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; background: var(--primary-blue); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-bottom: 4px solid var(--title-black); }
+        .site-title { font-family: var(--body-font); font-size: 2.5rem; color: white; letter-spacing: 1px; font-weight: 900; text-decoration: none; }
+        .main-nav ul { margin: 0; padding: 0; list-style: none; display: flex; }
+        .main-nav li { margin-left: 35px; }
+        .main-nav a { font-family: var(--body-font); font-weight: 700; text-decoration: none; color: white; font-size: 1.1em; padding: 8px 4px; position: relative; transition: color 0.3s; }
+        .main-nav a::after { content: ''; position: absolute; width: 0; height: 3px; display: block; margin-top: 5px; right: 0; background: var(--accent-yellow); transition: width .3s ease; }
+        .main-nav a:hover::after, .main-nav a.active::after { width: 100%; left: 0; }
+        .menu-toggle { display: none; cursor: pointer; z-index: 1001; }
+        .hamburger { width: 30px; height: 3px; background-color: white; position: relative; transition: all 0.3s ease; }
+        .hamburger::before, .hamburger::after { content: ''; position: absolute; width: 30px; height: 3px; background-color: white; transition: all 0.3s ease; }
+        .hamburger::before { top: -10px; }
+        .hamburger::after { top: 10px; }
+        @media (max-width: 900px) {
+            .main-nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background-color: var(--primary-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+            .main-nav.active { display: block; }
+            .main-nav ul { flex-direction: column; align-items: center; padding: 20px 0; }
+            .main-nav li { margin: 15px 0; }
+            .menu-toggle { display: block; }
+            .menu-toggle.active .hamburger { background-color: transparent; }
+            .menu-toggle.active .hamburger::before { transform: rotate(45deg); top: 0; }
+            .menu-toggle.active .hamburger::after { transform: rotate(-45deg); top: 0; }
+        }
+        @media (max-width: 768px) { .site-header { padding: 15px 20px; } .site-title { font-size: 2.2rem; } }
+
+        /* Page-specific styles */
+        .font-sans { font-family: var(--body-font); }
+        .section-title { font-weight: 800; color: #1e293b; }
+        .card { background-color: white; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); transition: all 0.3s ease-in-out; }
+        .card:hover { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); transform: translateY(-4px); }
+        .tab-button { transition: all 0.3s ease; border-bottom: 3px solid transparent; }
+        .tab-button.active { color: var(--primary-blue); border-bottom-color: var(--primary-blue); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .bg-hero { background-color: #0c4a6e; background-image: radial-gradient(at 0% 0%, hsla(204, 96%, 60%, 0.4) 0px, transparent 50%), radial-gradient(at 100% 100%, hsla(204, 96%, 60%, 0.4) 0px, transparent 50%); }
+        
+        .faq-item summary::-webkit-details-marker, .syllabus-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary, .syllabus-item summary { list-style: none; cursor: pointer; }
+        .faq-item summary:focus, .syllabus-item summary:focus { outline: none; }
+        .faq-item[open] summary .icon-plus, .syllabus-item[open] summary .icon-plus { display: none; }
+        .faq-item:not([open]) summary .icon-minus, .syllabus-item:not([open]) summary .icon-minus { display: none; }
+        .syllabus-item[open] summary { background-color: #f1f5f9; }
+
+
+        .quick-nav a { transition: all 0.2s ease-in-out; }
+        .quick-nav a:hover { background-color: #e2e8f0; } /* slate-200 */
+
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <!-- Header -->
+    <header class="site-header">
+        <a href="/index.html" class="site-title">VikPath</a>
+        <div class="menu-toggle"><div class="hamburger"></div></div>
+        <nav class="main-nav">
+             <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="index.html">IGNOU</a></li>
+                <li><a href="bapch.html" class="active">BAPCH</a></li>
+                <li><a href="bafpc.html">BAFPC</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <div class="bg-hero text-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">The Ultimate Guide to B.A. (Honours) Psychology</h1>
+                <p class="mt-4 text-lg md:text-xl text-sky-200 max-w-3xl mx-auto font-sans">Programme Code: BAPCH (CBCS)</p>
+                <p class="mt-2 text-md text-sky-300 max-w-3xl mx-auto font-sans">Your complete, top-to-bottom guide for IGNOU's CBCS curriculum. Everything a new student needs to know.</p>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            
+            <!-- NEW: Quick Navigation Section -->
+            <section class="mb-12">
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-4">Quick Navigation</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-sm font-semibold quick-nav">
+                        <a href="#overview" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-info-circle w-6 text-center text-blue-600 mr-2"></i>Overview</a>
+                        <a href="#fees" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-wallet w-6 text-center text-blue-600 mr-2"></i>Fee Structure</a>
+                        <a href="#calendar" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-calendar-alt w-6 text-center text-blue-600 mr-2"></i>Academic Calendar</a>
+                        <a href="#ignou-system" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-university w-6 text-center text-blue-600 mr-2"></i>Support System</a>
+                        <a href="#structure" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-sitemap w-6 text-center text-blue-600 mr-2"></i>Course Structure</a>
+                        <a href="#syllabus" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-book-reader w-6 text-center text-blue-600 mr-2"></i>Detailed Syllabus</a>
+                        <a href="#academic-process" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-tasks w-6 text-center text-blue-600 mr-2"></i>Academic Process</a>
+                        <a href="#grading" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-percentage w-6 text-center text-blue-600 mr-2"></i>Grading System</a>
+                        <a href="#study-tips" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-lightbulb w-6 text-center text-blue-600 mr-2"></i>Study Strategies</a>
+                        <a href="#faq" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-question-circle w-6 text-center text-blue-600 mr-2"></i>FAQs</a>
+                        <a href="#validity" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-check-double w-6 text-center text-blue-600 mr-2"></i>Degree Validity</a>
+                        <a href="#resources" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-globe w-6 text-center text-blue-600 mr-2"></i>Digital Resources</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Details Section -->
+            <section id="overview" class="mb-16">
+                 <h2 class="text-3xl section-title text-center mb-8">Programme at a Glance</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                    <div class="card p-6"><div class="text-4xl text-blue-600 mb-3"><i class="fas fa-graduation-cap"></i></div><h3 class="font-semibold text-lg text-slate-800">Total Credits</h3><p class="text-slate-600 font-sans">148 Credits</p></div>
+                    <div class="card p-6"><div class="text-4xl text-blue-600 mb-3"><i class="fas fa-hourglass-half"></i></div><h3 class="font-semibold text-lg text-slate-800">Programme Validity</h3><p class="text-slate-600 font-sans">Min: 3 Years | Max: 6 Years</p></div>
+                    <div class="card p-6"><div class="text-4xl text-blue-600 mb-3"><i class="fas fa-language"></i></div><h3 class="font-semibold text-lg text-slate-800">Medium</h3><p class="text-slate-600 font-sans">English & Hindi</p></div>
+                    <div class="card p-6"><div class="text-4xl text-blue-600 mb-3"><i class="fas fa-check-circle"></i></div><h3 class="font-semibold text-lg text-slate-800">Eligibility</h3><p class="text-slate-600 font-sans">10+2 or its equivalent</p></div>
+                </div>
+            </section>
+            
+            <!-- UPDATED: Fee Structure Section -->
+            <section id="fees" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">Programme Fee Structure</h2>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <p class="text-center text-slate-600 mb-6 font-sans">The total fee is paid on a yearly basis. Below is the current breakdown as of the July 2025 session. Fees are subject to change as per IGNOU's policies.</p>
+                    <div class="grid md:grid-cols-2 gap-8 text-center">
+                        <div>
+                            <div class="card p-6 border-2 border-blue-200">
+                                <h3 class="text-2xl font-bold text-slate-800">Per Year Fee</h3>
+                                <p class="text-4xl font-extrabold text-blue-600 my-3">₹5,300</p>
+                                <p class="text-slate-500 font-sans">(Total: ₹15,900 for 3 Years)</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="card p-6 border-2 border-slate-200">
+                                <h3 class="text-2xl font-bold text-slate-800">One-Time Fees</h3>
+                                <p class="text-slate-600 mt-4 font-sans"><span class="font-bold">Registration Fee:</span> ₹300</p>
+                                <p class="text-slate-600 font-sans"><span class="font-bold">Development Fee:</span> ₹200</p>
+                                <p class="font-bold text-lg text-slate-800 mt-2">Total at Admission: ₹5,800</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-sm text-center text-slate-500 font-sans">
+                        <p><i class="fas fa-info-circle mr-1"></i> The fee for the 2nd and 3rd year is ₹5,300 each, paid during re-registration. The examination fee is separate and paid before each Term-End Exam session.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW: Academic Calendar -->
+            <section id="calendar" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">Typical Academic Calendar (Yearly System)</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 text-center"><i class="fas fa-sun mr-2 text-amber-500"></i>July Session Timeline</h3>
+                        <ul class="space-y-3 text-slate-600 font-sans">
+                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Admission:</strong> May - August</li>
+                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Assignment Submission:</strong> October - March (Deadline is usually March 31st)</li>
+                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Term-End Examination:</strong> June</li>
+                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Result Declaration:</strong> August</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4 text-center"><i class="fas fa-snowflake mr-2 text-sky-500"></i>January Session Timeline</h3>
+                        <ul class="space-y-3 text-slate-600 font-sans">
+                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Admission:</strong> November - February</li>
+                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Assignment Submission:</strong> March - September (Deadline is usually September 30th)</li>
+                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Term-End Examination:</strong> December</li>
+                            <li class="p-3 bg-slate-50 rounded-lg"><strong>Result Declaration:</strong> February</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+             <!-- NEW: Understanding IGNOU System -->
+            <section id="ignou-system" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">The IGNOU Support System Explained</h2>
+                <div class="bg-white p-8 rounded-lg shadow-lg space-y-6">
+                    <p class="text-center text-slate-600 mb-8 font-sans">To navigate IGNOU effectively, it's crucial to understand its two main support pillars: the Regional Centre and the Study Centre.</p>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                             <h4 class="font-bold text-lg text-blue-800 flex items-center mb-3"><i class="fas fa-building mr-3"></i>Regional Centre (RC): Your Admin Hub</h4>
+                             <p class="text-slate-700 mb-4 font-sans">The RC is your main administrative office for a specific geographical region. It manages your student record, admissions, and examinations.</p>
+                             <strong class="text-slate-800">Contact your RC for:</strong>
+                             <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700 font-sans">
+                                 <li>Admission confirmation and ID card issues</li>
+                                 <li>Changes to your address or Study Centre</li>
+                                 <li>Exam-related issues and results</li>
+                                 <li>Final grade card and degree certificate</li>
+                             </ul>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                             <h4 class="font-bold text-lg text-green-800 flex items-center mb-3"><i class="fas fa-school mr-3"></i>Study Centre (LSC): Your Academic Hub</h4>
+                             <p class="text-slate-700 mb-4 font-sans">This is your local academic contact point, usually a local college. You are assigned a Study Centre (also called a Learner Support Centre) for academic support.</p>
+                             <strong class="text-slate-800">Contact your LSC for:</strong>
+                             <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700 font-sans">
+                                 <li>Schedule for Academic Counselling sessions</li>
+                                 <li>Submitting assignments (online or offline)</li>
+                                 <li>Information on practicals and viva-voce</li>
+                                 <li>General academic guidance from counsellors</li>
+                             </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Yearly Course Breakdown -->
+            <section id="structure" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">Yearly Course Breakdown</h2>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="border-b border-gray-200 mb-6">
+                        <nav class="-mb-px flex space-x-6 overflow-x-auto" aria-label="Tabs">
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-base font-semibold font-sans" data-tab="year1">Year 1 (44 Credits)</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-base font-semibold font-sans" data-tab="year2">Year 2 (56 Credits)</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-base font-semibold font-sans" data-tab="year3">Year 3 (48 Credits)</button>
+                        </nav>
+                    </div>
+                    <!-- Year 1 -->
+                    <div id="year1" class="tab-content"><div class="grid md:grid-cols-2 gap-8"><div><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester I (22 Credits)</h3><ul class="space-y-3 text-slate-600 font-sans">
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 101:</strong> Introduction to Psychology (CC - 6)<br><small class="text-slate-500">Covers fundamental concepts, history, and branches of psychology.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 102:</strong> Biopsychology (CC - 6)<br><small class="text-slate-500">Explores the relationship between biology, the brain, and behavior.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BEVAE 181:</strong> Environmental Studies (AECC - 4)</li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BSOG 171:</strong> Indian Society: Images and Realities (GE - 6)</li>
+                    </ul></div><div><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester II (22 Credits)</h3><ul class="space-y-3 text-slate-600 font-sans">
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 103:</strong> Psychology of Individual Differences (CC - 6)<br><small class="text-slate-500">Examines personality, intelligence, and other factors that make individuals unique.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 104:</strong> Statistical Methods for Psychological Research-I (CC - 6)<br><small class="text-slate-500">Focuses on descriptive statistics and foundational data analysis.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>AECC-2:</strong> English/Hindi Communication Skills (AECC - 4)</li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BGDG 172:</strong> Gender Sensitization: Society and Culture (GE - 6)</li>
+                    </ul></div></div></div>
+                    <!-- Year 2 -->
+                    <div id="year2" class="tab-content"><div class="grid md:grid-cols-2 gap-8"><div><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester III (28 Credits)</h3><ul class="space-y-3 text-slate-600 font-sans">
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 105:</strong> Psychological Research (CC - 6)<br><small class="text-slate-500">Introduces scientific methods, research designs, and ethics in psychology.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 106:</strong> Development of Psychological Thought (CC - 6)<br><small class="text-slate-500">Traces the historical evolution of psychological theories and schools of thought.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 107:</strong> Social Psychology (CC - 6)<br><small class="text-slate-500">Explores how individuals think, feel, and behave in social situations.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BANS 183:</strong> Tourism Anthropology (SEC - 4)</li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BSOG 173:</strong> Rethinking Development (GE - 6)</li>
+                    </ul></div><div><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester IV (28 Credits)</h3><ul class="space-y-3 text-slate-600 font-sans">
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 108:</strong> Statistical Methods for Psychological Research-II (CC - 6)<br><small class="text-slate-500">Covers inferential statistics, hypothesis testing, and advanced statistical tools.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 109:</strong> Developmental Psychology (CC - 6)<br><small class="text-slate-500">Studies human growth and change across the lifespan.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 110:</strong> Applied Social Psychology (CC - 6)<br><small class="text-slate-500">Focuses on the application of social psychology principles to real-world issues.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BANS 184:</strong> Public Health and Epidemiology (SEC - 4)</li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPAG 174:</strong> Sustainable Development (GE - 6)</li>
+                    </ul></div></div></div>
+                    <!-- Year 3 -->
+                    <div id="year3" class="tab-content"><div class="grid md:grid-cols-2 gap-8"><div><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester V (24 Credits)</h3><ul class="space-y-3 text-slate-600 font-sans">
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 111:</strong> Understanding Psychological Disorders (CC - 6)<br><small class="text-slate-500">Introduces concepts of normality, abnormality, and major psychological disorders.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 112:</strong> Organizational Behaviour (CC - 6)<br><small class="text-slate-500">Studies human behavior within organizational settings and its impact.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCE 141:</strong> Positive Psychology (DSE - 6)</li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCE 143:</strong> Environmental Psychology (DSE - 6)</li>
+                    </ul></div><div><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester VI (24 Credits)</h3><ul class="space-y-3 text-slate-600 font-sans">
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 113:</strong> Understanding and Dealing with Psychological Disorders (CC - 6)<br><small class="text-slate-500">Focuses on therapeutic interventions and management of psychological disorders.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCC 114:</strong> Counselling Psychology (CC - 6)<br><small class="text-slate-500">Covers theories, processes, and skills fundamental to counselling.</small></li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCE 142:</strong> Forensic Psychology (DSE - 6)</li>
+                        <li class="p-4 bg-slate-50 rounded-lg"><strong>BPCE 144:</strong> Dissertation (DSE - 6)<br><small class="text-slate-500">A research project where students apply their knowledge to conduct a study.</small></li>
+                    </ul></div></div></div>
+                </div>
+            </section>
+            
+            <!-- NEW: Detailed Syllabus Section -->
+            <section id="syllabus" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-12">Detailed Syllabus (Core & DSE)</h2>
+                <div class="max-w-4xl mx-auto space-y-4 font-sans">
+                    <!-- First Year -->
+                    <h3 class="text-2xl font-bold text-slate-800 mt-8 mb-4 border-b-2 border-blue-500 pb-2">First Year Courses</h3>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-101: Introduction to Psychology <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-3"><p><strong>Block 1: Introduction to Psychology</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Origin of Psychology</li><li>Unit 2: Nature and Scope of Psychology</li><li>Unit 3: Systems and Theories of Psychology</li><li>Unit 4: Subfields of Psychology</li></ul><p><strong>Block 2: Perception, Learning and Memory</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 5: Sensation and Perception</li><li>Unit 6: Learning</li><li>Unit 7: Memory</li></ul><p><strong>Block 3: Motivation, Emotion, Intelligence and Creativity</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 8: Motivation</li><li>Unit 9: Emotion</li><li>Unit 10: Intelligence and Creativity</li></ul><p><strong>Block 4: Personality</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 11: Definition and Nature of Personality</li><li>Unit 12: Theories of Personality</li></ul></div></details>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-102: Biopsychology <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-3"><p><strong>Block 1: Introduction to Biopsychology</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Nature and Scope</li><li>Unit 2: Methods and Divisions</li></ul><p><strong>Block 2: The Nervous System</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 3: Anatomy and Functions</li><li>Unit 4: Neural Conduction and Synaptic Transmission</li></ul><p><strong>Block 3: The Endocrine System</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 5: Structure and Functions</li><li>Unit 6: Role of Hormones in Regulating Behavior</li></ul></div></details>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-103: Psychology of Individual Differences <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-3"><p><strong>Block 1: Introduction to Individual Differences</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Meaning and Areas</li><li>Unit 2: Heredity and Environment</li></ul><p><strong>Block 2: Intelligence</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 3: Theories of Intelligence</li><li>Unit 4: Measurement of Intelligence</li></ul><p><strong>Block 3: Personality</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 5: Theories of Personality</li><li>Unit 6: Assessment of Personality</li></ul><p><strong>Block 4: Creativity and Adjustment</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 7: Concept and Measurement</li><li>Unit 8: Well-being and Adjustment</li></ul></div></details>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-104: Statistical Methods for Psychological Research-I <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-3"><p><strong>Block 1: Introduction to Statistics</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Parametric and Non-parametric Statistics</li><li>Unit 2: Data Organisation and Graphical Representation</li></ul><p><strong>Block 2: Measures of Central Tendency</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 3: Concept and Calculation</li><li>Unit 4: Properties and Application</li></ul><p><strong>Block 3: Measures of Variability</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 5: Concept and Calculation</li><li>Unit 6: Properties and Application</li></ul><p><strong>Block 4: Correlation</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 7: Concept and Calculation</li><li>Unit 8: Other Methods of Correlation</li></ul></div></details>
+
+                    <!-- Second Year -->
+                    <h3 class="text-2xl font-bold text-slate-800 mt-8 mb-4 border-b-2 border-blue-500 pb-2">Second Year Courses</h3>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-105: Psychological Research <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-3"><p><strong>Block 1: Introduction to Research in Psychology</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Basics of Research</li><li>Unit 2: Aims, Goals and Principles of Psychological Research</li><li>Unit 3: Reliability, Validity and Standardization</li><li>Unit 4: Ethical issues in Psychological Research</li></ul><p><strong>Block 2: Types of Research</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 5: Experimental Method</li><li>Unit 6: Non-Experimental Method</li><li>Unit 7: Quasi-Experimental Method</li><li>Unit 8: Other Methods (Case study, Archival, field study)</li></ul><p><strong>Block 3: Research Design</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 9: Introduction to Research Design</li><li>Unit 10: Sampling</li></ul><p><strong>Block 4: Report Writing</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 11: Preparation of a Research Report</li></ul></div></details>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-106: Development of Psychological Thought <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-3"><p><strong>Block 1: An Overview</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Psychology as a Science</li><li>Unit 2: Contribution of Early Pioneers</li></ul><p><strong>Block 2: Development of Psychology</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 3: Structuralism, Functionalism and Behaviorism</li><li>Unit 4: Gestalt Psychology, Psychoanalysis and Humanistic Psychology</li></ul><p><strong>Block 3: Contemporary Developments in Psychology</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 5: Cognitive Psychology</li><li>Unit 6: Recent Trends in Psychology</li></ul></div></details>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-107: Social Psychology <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-3"><p><strong>Block 1: Introduction to Social Psychology</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Nature and Scope</li><li>Unit 2: Theoretical Perspectives</li></ul><p><strong>Block 2: Social Cognition and Social Perception</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 3: Social Cognition</li><li>Unit 4: Social Perception</li></ul><p><strong>Block 3: Attitude and Group Dynamics</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 5: Attitude and Attitude Change</li><li>Unit 6: Group and Group Dynamics</li></ul><p><strong>Block 4: Social Influence and Prosocial Behavior</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 7: Social Influence</li><li>Unit 8: Prosocial Behavior</li></ul></div></details>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-108: Statistical Methods for Psychological Research-II <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 font-sans text-sm space-y-3"><p><strong>Block 1: Introduction to Statistical Methods-II</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Normal Distribution</li><li>Unit 2: Skewness and Kurtosis</li></ul><p><strong>Block 2: Inferential Statistics</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 3: Introduction to Inferential Statistics</li><li>Unit 4: Test of Significance of Difference Between Means</li></ul><p><strong>Block 3: Chi-Square Test</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 5: Introduction to Chi-Square</li><li>Unit 6: Application of Chi-Square</li></ul></div></details>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-109: Developmental Psychology <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 font-sans text-sm space-y-3"><p><strong>Block 1: Introduction to Developmental Psychology</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Introduction to Human Development</li><li>Unit 2: Theories of Development</li></ul><p><strong>Block 2: Cognitive and Language Development</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 3: Cognitive Development</li><li>Unit 4: Language Development</li></ul><p><strong>Block 3: Socio-emotional Development</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 5: Emotional Development</li><li>Unit 6: Social and Moral Development</li></ul><p><strong>Block 4: Context of Human Development</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 7: Family</li><li>Unit 8: Schooling and Peer group</li></ul></div></details>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-110: Applied Social Psychology <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 font-sans text-sm space-y-3"><p><strong>Block 1: Introduction to Applied Social Psychology</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Introduction</li><li>Unit 2: Social Psychological Theories</li><li>Unit 3: Research Methods</li></ul><p><strong>Block 2: Areas of Applied Social Psychology</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 4: Social Psychology and Health</li><li>Unit 5: Social Psychology and Environment</li><li>Unit 6: Social Psychology and Law</li></ul><p><strong>Block 3: Application of Social Psychology to Community</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 7: Concept of Community</li><li>Unit 8: Understanding Community Problems</li></ul></div></details>
+
+                    <!-- Third Year -->
+                    <h3 class="text-2xl font-bold text-slate-800 mt-8 mb-4 border-b-2 border-blue-500 pb-2">Third Year Courses</h3>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-111: Understanding Psychological Disorders <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 font-sans text-sm space-y-3"><p><strong>Block 1: Fundamentals of Abnormal Psychology</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Concepts of Normality and Abnormality</li><li>Unit 2: Classification of Psychological Disorders</li><li>Unit 3: Clinical Assessment</li></ul><p><strong>Block 2: Neurodevelopmental and Anxiety Related Disorders</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 4: Neurodevelopmental Disorders</li><li>Unit 5: Anxiety, Obsessive-Compulsive and Related Disorders</li></ul><p><strong>Block 3: Trauma, Somatic and Depressive Disorders</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 6: Trauma and Stressor Related Disorders</li><li>Unit 7: Somatic Symptoms and Related Disorders</li><li>Unit 8: Depressive Disorders</li></ul><p><strong>Block 4: Schizophrenia Spectrum and Bipolar Related Disorders</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 9: Schizophrenia Spectrum and Other Psychotic Disorders</li><li>Unit 10: Bipolar and Related Disorders</li></ul></div></details>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-112: Organizational Behaviour <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 font-sans text-sm space-y-3"><p><strong>Block 1: Introduction to Organizational Behavior</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Introduction, Concept and Models</li><li>Unit 2: Individual Behavior</li></ul><p><strong>Block 2: Motivation and Leadership</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 3: Motivation and its Theories</li><li>Unit 4: Leadership</li></ul><p><strong>Block 3: Group Behavior and Conflict Management</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 5: Group Behavior</li><li>Unit 6: Conflict and Negotiation</li></ul><p><strong>Block 4: Organizational Processes</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 7: Organizational Culture</li><li>Unit 8: Organizational Development</li></ul></div></details>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-113: Understanding and Dealing with Psychological Disorders <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 font-sans text-sm space-y-3"><p><strong>Block 1: Dissociative, Sexual and Personality Disorders</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Dissociative and Feeding and Eating Disorders</li><li>Unit 2: Sexual Dysfunctions and Paraphilic Disorders</li><li>Unit 3: Personality Disorders</li></ul><p><strong>Block 2: Substance-Related and Neurocognitive Disorders</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 4: Substance-Related and Addictive Disorders</li><li>Unit 5: Neurocognitive Disorders</li></ul><p><strong>Block 3: Psychological Interventions</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 6: Psychodynamic and Humanistic-Existential Therapies</li><li>Unit 7: Behavior Therapy and Cognitive Behavior Therapy</li></ul><p><strong>Block 4: Other Interventions</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 8: Group Therapy</li><li>Unit 9: Counselling</li><li>Unit 10: Other Therapies (Yoga, Meditation, Art therapy)</li></ul></div></details>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BPCC-114: Counselling Psychology <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 font-sans text-sm space-y-3"><p><strong>Block 1: Introduction to Counselling Psychology</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 1: Introduction</li><li>Unit 2: Basic Counselling Skills</li></ul><p><strong>Block 2: Assessment in Counselling</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 3: Assessment: The Basis for Counselling</li><li>Unit 4: Process of Counselling</li></ul><p><strong>Block 3: Areas of Counselling</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 5: Counselling for Family and Marital Problems</li><li>Unit 6: Counselling for Children and Adolescents</li><li>Unit 7: Counselling for Substance Abuse</li></ul><p><strong>Block 4: Professional Issues in Counselling</strong></p><ul class="list-disc list-inside ml-4"><li>Unit 8: Ethical Issues in Counselling</li><li>Unit 9: Counselling in the Indian Context</li></ul></div></details>
+                    <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">Discipline Specific Electives (BPCE-141 to 144) <span class="text-blue-500 text-xl"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary><div class="mt-4 text-slate-600 font-sans text-sm space-y-3"><p><strong>BPCE-141: Positive Psychology:</strong> Focuses on human strengths, virtues, and factors that contribute to a fulfilling life. Topics include happiness, well-being, resilience, optimism, and character strengths.</p><p><strong>BPCE-143: Environmental Psychology:</strong> Explores the relationship between individuals and their physical surroundings. Topics include environmental perception, crowding, personal space, and the psychological impact of built and natural environments.</p><p><strong>BPCE-142: Forensic Psychology:</strong> Covers the application of psychological principles to the legal system. Topics include criminal profiling, eyewitness testimony, psychology of interrogation, and assessment of offenders.</p><p><strong>BPCE-144: Dissertation:</strong> This is a mandatory research project. Students are required to conduct a small-scale empirical study on a topic of their choice under the guidance of an academic supervisor. It involves formulating a research question, collecting and analyzing data, and writing a formal research report.</p></div></details>
+                </div>
+            </section>
+            
+            <!-- Academic Processes -->
+            <section class="mb-16" id="academic-process">
+                <h2 class="text-3xl section-title text-center mb-8">Key Academic Processes In-Depth</h2>
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Assignments -->
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4"><i class="fas fa-pencil-ruler mr-3 text-blue-500"></i>The Assignment Process (30% Weightage)</h3>
+                        <p class="text-slate-600 mb-4 font-sans">Tutor Marked Assignments (TMAs) are mandatory for every course and contribute 30% to your final grade.</p>
+                        <ol class="list-decimal list-inside space-y-3 text-slate-600 font-sans">
+                            <li><strong>Download:</strong> Get the latest TMAs from the IGNOU Assignment Portal for your admission cycle.</li>
+                            <li><strong>Write:</strong> Answer all questions in your own handwriting on A4 paper. Use a cover page with your Enrolment No., Name, Address, Course Code & Title, etc.</li>
+                            <li><strong>Submit:</strong> Most Regional Centres have an online portal for assignment submission. Submit before the deadline (typically March 31st for July session & September 30th for January session).</li>
+                            <li><strong>Keep Proof:</strong> Always save a digital copy (scan or photos) of your submitted assignments and the submission receipt.</li>
+                             <li><strong>Check Status:</strong> After a few weeks, check your assignment submission status and marks on the IGNOU website under "Student Support" -> "Student Zone".</li>
+                        </ol>
+                    </div>
+                    <!-- Examinations -->
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-slate-800 mb-4"><i class="fas fa-file-alt mr-3 text-green-500"></i>The Examination Process (70% Weightage)</h3>
+                         <p class="text-slate-600 mb-4 font-sans">The Term-End Examination (TEE) is the final written exam for each course, contributing 70% to your final grade. They are held twice a year in June and December.</p>
+                         <ul class="list-disc list-inside space-y-3 text-slate-700 font-sans">
+                            <li><strong>Exam Fees:</strong> The fee is paid online when filling the exam form.
+                                <ul class="list-['-_'] list-inside ml-4 mt-1">
+                                    <li>Theory Course: ₹200 per course</li>
+                                    <li>Practical/Lab: ₹300 (up to 4 credits), ₹500 (above 4 credits)</li>
+                                    <li>Project (Dissertation): ₹500 (for BPCE-144, as it is above 4 credits)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Hall Ticket:</strong> Hall Tickets are not sent by post. They are uploaded on the IGNOU website 7-10 days before exams begin.</li>
+                            <li><strong>Mandatory Documents:</strong> You must bring your printed Hall Ticket and your official IGNOU Student ID card to the examination centre. Without both, you will not be permitted to appear for the exam.</li>
+                             <li><strong>Missed Exams:</strong> There's no penalty for missing an exam. You can simply appear for it in the next 6-month cycle by filling the exam form and paying the fee again.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+             <!-- NEW: Grading System -->
+            <section id="grading" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">Evaluation and Grading System</h2>
+                <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+                    <p class="text-center text-slate-600 mb-6 font-sans">For Bachelor Degree Programmes under CBCS like BAPCH, IGNOU uses a 10-Point Grading System. Your final grade for each course is a combination of your assignment marks (30% weightage) and your Term-End Exam marks (70% weightage). The final percentage is then converted into a letter grade as shown below.</p>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-left text-slate-500 font-sans">
+                            <thead class="text-xs text-slate-700 uppercase bg-slate-100">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">Letter Grade</th>
+                                    <th scope="col" class="px-6 py-3">Numerical Grade</th>
+                                    <th scope="col" class="px-6 py-3">Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-slate-900">O (Outstanding)</td><td class="px-6 py-4">10</td><td class="px-6 py-4">≥85</td></tr>
+                                <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-medium text-slate-900">A+ (Excellent)</td><td class="px-6 py-4">9</td><td class="px-6 py-4">≥ 75 to < 85</td></tr>
+                                <tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-slate-900">A (Very Good)</td><td class="px-6 py-4">8</td><td class="px-6 py-4">≥ 65 to < 75</td></tr>
+                                <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-medium text-slate-900">B+ (Good)</td><td class="px-6 py-4">7</td><td class="px-6 py-4">≥ 55 to < 65</td></tr>
+                                <tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-slate-900">B (Above Average)</td><td class="px-6 py-4">6</td><td class="px-6 py-4">≥ 50 to < 55</td></tr>
+                                <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-medium text-slate-900">C (Average)</td><td class="px-6 py-4">5</td><td class="px-6 py-4">≥ 40 to < 50</td></tr>
+                                <tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-slate-900">D (Pass)</td><td class="px-6 py-4">4</td><td class="px-6 py-4">≥ 35 to < 40</td></tr>
+                                <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-medium text-slate-900">F (Fail)</td><td class="px-6 py-4">0</td><td class="px-6 py-4">< 35</td></tr>
+                                <tr class="bg-white"><td class="px-6 py-4 font-medium text-slate-900">Ab (Absent)</td><td class="px-6 py-4">0</td><td class="px-6 py-4">Absent</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NEW: Study Strategies Section -->
+            <section id="study-tips" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">Study Strategies for Success in BAPCH</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6">
+                        <h3 class="font-bold text-lg text-slate-800 mb-3"><i class="fas fa-book-reader mr-2 text-blue-500"></i>Master Your SLMs</h3>
+                        <p class="text-sm text-slate-600 font-sans">IGNOU's Self-Learning Materials (SLMs) are comprehensive. Make them your primary resource. The exam questions are almost always based on them.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="font-bold text-lg text-slate-800 mb-3"><i class="fas fa-history mr-2 text-blue-500"></i>Use Previous Year Questions</h3>
+                        <p class="text-sm text-slate-600 font-sans">Solving question papers from the last 5-10 exam sessions is the single most effective preparation strategy. It helps you understand the pattern, important topics, and how to structure your answers.</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="font-bold text-lg text-slate-800 mb-3"><i class="fas fa-pen-nib mr-2 text-blue-500"></i>Assignments are Key</h3>
+                        <p class="text-sm text-slate-600 font-sans">Take your assignments seriously. They not only carry 30% weightage but also serve as excellent practice for the final exams. Write them yourself after studying the material to truly test your knowledge.</p>
+                    </div>
+                </div>
+            </section>
+
+             <!-- NEW: FAQ Section -->
+            <section id="faq" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">Frequently Asked Questions</h2>
+                <div class="max-w-4xl mx-auto space-y-4">
+                    <details class="faq-item bg-white p-6 rounded-lg shadow-md group">
+                        <summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">What is the main difference between BAPCH and BAFPC? <span class="text-blue-500"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary>
+                        <div class="mt-4 text-slate-600 font-sans">BAPCH is a 3-year B.A. (Honours) degree under the older CBCS system. BAFPC is part of the new 4-year FYUP system, which starts as a B.A. (Major) and becomes an Honours degree after the 4th year. BAPCH has a more rigid, psychology-focused structure from the start, while BAFPC is more interdisciplinary in the initial years.</div>
+                    </details>
+                    <details class="faq-item bg-white p-6 rounded-lg shadow-md group">
+                        <summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">Are there compulsory practicals in the BAPCH programme? <span class="text-blue-500"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary>
+                        <div class="mt-4 text-slate-600 font-sans">Yes. In the BAPCH curriculum, several core courses have a 2-credit practical component (e.g., BPCC-101, 103, 105) or a 2-credit tutorial component. While attendance at practical counselling sessions at your study centre is not always mandatory, completing and submitting the practical-based assignments is compulsory to pass the course. The final semester also includes a 6-credit Dissertation (BPCE-144) which is a mandatory research project.</div>
+                    </details>
+                     <details class="faq-item bg-white p-6 rounded-lg shadow-md group">
+                        <summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">What is Re-Registration? <span class="text-blue-500"><i class="fas fa-plus icon-plus"></i><i class="fas fa-minus icon-minus"></i></span></summary>
+                        <div class="mt-4 text-slate-600 font-sans">Re-registration is the process of enrolling for the next year of your programme (e.g., from 1st year to 2nd year). It is different from the exam form. You must re-register online once a year to continue your studies, regardless of whether you have passed all your previous year's exams.</div>
+                    </details>
+                </div>
+            </section>
+            
+            <!-- Degree Validity Section -->
+            <section id="validity" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">Degree Validity & Your Career Path</h2>
+                <div class="bg-white p-8 rounded-lg shadow-lg space-y-6">
+                    <p class="text-center text-slate-600 font-sans">Based on official university information, here's what you need to know about the BAPCH degree's standing and your future options.</p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 p-6 rounded-lg border border-blue-200"><h4 class="font-bold text-lg text-blue-800 flex items-center mb-3"><i class="fas fa-shield-alt mr-3"></i>IGNOU's Exempted Status</h4><p class="text-slate-700 font-sans">The UGC has officially exempted IGNOU from its ODL (Open and Distance Learning) and Online regulations since the 2020-2021 academic session. This gives IGNOU special status to continue offering programmes like Psychology.</p></div>
+                        <div class="bg-green-50 p-6 rounded-lg border border-green-200"><h4 class="font-bold text-lg text-green-800 flex items-center mb-3"><i class="fas fa-graduation-cap mr-3"></i>An Academic Degree, Not a Professional License</h4><p class="text-slate-700 font-sans">The BAPCH degree is a <strong>valid academic qualification</strong>, treated as equivalent to degrees from conventional universities. It makes you eligible for further studies, such as an M.A. in Psychology. However, it is <strong>not</strong> a professional healthcare qualification by itself under the NCAHP Act, as that act may require regular learning mode for professional licensing.</p></div>
+                    </div>
+                    <div class="bg-amber-50 p-6 rounded-lg border border-amber-200"><h4 class="font-bold text-lg text-amber-800 flex items-center mb-3"><i class="fas fa-road mr-3"></i>Your Path Forward: Important Advice</h4><ul class="list-disc list-inside space-y-2 text-slate-700 font-sans">
+                        <li><strong>For Academic Careers:</strong> Your BAPCH degree is a strong foundation for pursuing Master's degrees, Ph.D., and entering academic or research fields.</li>
+                        <li><strong>For Professional Practice (e.g., Counseling):</strong> To become a licensed counselor or clinical psychologist in India, you will likely need to complete a Master's degree in a <strong>regular, face-to-face mode</strong> from a recognized university.</li>
+                    </ul></div>
+                    <div class="bg-red-50 p-6 rounded-lg border border-red-200 text-center"><a href="https://vikpath.blogspot.com/2025/10/ugc-halts-distance-psychology-and-ncahp.html" target="_blank" class="font-bold text-red-700 hover:text-red-900 transition-colors"><i class="fas fa-info-circle mr-2"></i>Click Here for a Detailed Explanation of UGC Rules & IGNOU's Status</a></div>
+                </div>
+            </section>
+
+            <!-- UPDATED: Essential Digital Resources -->
+            <section id="resources" class="mb-16">
+                 <h2 class="text-3xl section-title text-center mb-8">IGNOU's Digital Ecosystem</h2>
+                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                     <div class="card p-6 flex flex-col items-center text-center"><div class="text-4xl text-blue-600 mb-4"><i class="fas fa-user-circle"></i></div><h3 class="font-bold text-lg text-slate-800">Student Portal</h3><p class="text-slate-600 text-sm mt-2 mb-4 flex-grow font-sans">Your personal dashboard to download your ID card, re-register, and manage your profile.</p><a href="https://ignou.samarth.edu.in" target="_blank" class="font-semibold text-blue-600 hover:underline font-sans">Go to Portal <i class="fas fa-external-link-alt text-xs"></i></a></div>
+                     <div class="card p-6 flex flex-col items-center text-center"><div class="text-4xl text-blue-600 mb-4"><i class="fas fa-book-open"></i></div><h3 class="font-bold text-lg text-slate-800">eGyanKosh</h3><p class="text-slate-600 text-sm mt-2 mb-4 flex-grow font-sans">IGNOU's digital library. Access and download digital versions of all your course books (SLMs) for free.</p><a href="https://egyankosh.ac.in" target="_blank" class="font-semibold text-blue-600 hover:underline font-sans">Access e-Books <i class="fas fa-external-link-alt text-xs"></i></a></div>
+                     <div class="card p-6 flex flex-col items-center text-center"><div class="text-4xl text-blue-600 mb-4"><i class="fas fa-file-signature"></i></div><h3 class="font-bold text-lg text-slate-800">Assignment Portal</h3><p class="text-slate-600 text-sm mt-2 mb-4 flex-grow font-sans">Download the latest Tutor-Marked Assignments (TMAs) for your courses for the current academic session.</p><a href="https://webservices.ignou.ac.in/assignments/" target="_blank" class="font-semibold text-blue-600 hover:underline font-sans">Get Assignments <i class="fas fa-external-link-alt text-xs"></i></a></div>
+                     <div class="card p-6 flex flex-col items-center text-center"><div class="text-4xl text-blue-600 mb-4"><i class="fas fa-question-circle"></i></div><h3 class="font-bold text-lg text-slate-800">Previous Year Questions</h3><p class="text-slate-600 text-sm mt-2 mb-4 flex-grow font-sans">Practice for your TEE by downloading question papers from previous exam sessions.</p><a href="https://webservices.ignou.ac.in/Pre-Question/" target="_blank" class="font-semibold text-blue-600 hover:underline font-sans">Find Papers <i class="fas fa-external-link-alt text-xs"></i></a></div>
+                     <div class="card p-6 flex flex-col items-center text-center"><div class="text-4xl text-blue-600 mb-4"><i class="fab fa-telegram"></i></div><h3 class="font-bold text-lg text-slate-800">BAPCH/BAFPC Telegram Unofficial Group</h3><p class="text-slate-600 text-sm mt-2 mb-4 flex-grow font-sans">Connect with fellow students to discuss courses, share notes, and get peer support in this unofficial group run by VikPath.</p><a href="https://t.me/IGNOU_BAPCH_BAFPC" target="_blank" class="font-semibold text-blue-600 hover:underline font-sans">Join the Group <i class="fas fa-external-link-alt text-xs"></i></a></div>
+                     <div class="card p-6 flex flex-col items-center text-center"><div class="text-4xl text-blue-600 mb-4"><i class="fas fa-tv"></i></div><h3 class="font-bold text-lg text-slate-800">Gyan Darshan</h3><p class="text-slate-600 text-sm mt-2 mb-4 flex-grow font-sans">IGNOU's educational TV channel. Watch live lectures and recorded academic programs.</p><a href="http://gd.ignouonline.ac.in/gyandarshan/" target="_blank" class="font-semibold text-blue-600 hover:underline font-sans">Watch Now <i class="fas fa-external-link-alt text-xs"></i></a></div>
+                      <div class="card p-6 flex flex-col items-center text-center"><div class="text-4xl text-blue-600 mb-4"><i class="fas fa-podcast"></i></div><h3 class="font-bold text-lg text-slate-800">Gyan Vani / Gyandhara</h3><p class="text-slate-600 text-sm mt-2 mb-4 flex-grow font-sans">An educational FM Radio network and internet audio service with curriculum-based programs and live counselling.</p><a href="http://gd.ignouonline.ac.in/gyandhara/" target="_blank" class="font-semibold text-blue-600 hover:underline font-sans">Listen Live <i class="fas fa-external-link-alt text-xs"></i></a></div>
+                     <div class="card p-6 flex flex-col items-center text-center"><div class="text-4xl text-blue-600 mb-4"><i class="fas fa-mobile-alt"></i></div><h3 class="font-bold text-lg text-slate-800">IGNOU e-Content App</h3><p class="text-slate-600 text-sm mt-2 mb-4 flex-grow font-sans">Access your course materials, videos, and more on your smartphone via the official app.</p><a href="https://play.google.com/store/apps/details?id=ac.in.ignou.econtent" target="_blank" class="font-semibold text-blue-600 hover:underline font-sans">Download App <i class="fas fa-external-link-alt text-xs"></i></a></div>
+                 </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-sm text-slate-400">
+            <p class="font-sans">&copy; 2025 VikPath | All information sourced from IGNOU Prospectus & Programme Guides. This is an unofficial guide and is subject to change.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Mobile Menu
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mainNav = document.querySelector('.main-nav');
+    if(menuToggle && mainNav) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mainNav.classList.toggle('active');
+        });
+    }
+
+    // Smooth scroll for on-page links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (document.querySelector(targetId)) {
+                e.preventDefault();
+                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                if (mainNav.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    mainNav.classList.remove('active');
+                }
+            }
+        });
+    });
+    
+    // Tabs for Yearly Course Breakdown
+    const tabs = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const targetTab = tab.getAttribute('data-tab');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === targetTab) content.classList.add('active');
+            });
+        });
+    });
+    if(tabs.length > 0) tabs[0].click();
+});
+</script>
+
+</body>
+</html>
+

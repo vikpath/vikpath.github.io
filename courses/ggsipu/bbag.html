@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate BBA Guide - GGSIPU - VikPath</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-blue: #0077b6;
+            --dark-blue: #023e8a;
+            --accent-yellow: #ffc300;
+            --accent-red: #e74c3c;
+            --neutral-text: #333;
+            --title-black: #212529;
+            --background-light: #f8fafc; /* slate-50 */
+            --comic-font: 'Bangers', cursive;
+            --body-font: 'Lato', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--body-font); background-color: var(--background-light); color: var(--neutral-text); }
+        
+        /* VikPath Header Styles */
+        .site-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; background: var(--primary-blue); position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-bottom: 4px solid var(--title-black); }
+        .site-title { font-family: var(--body-font); font-size: 2.5rem; color: white; letter-spacing: 1px; font-weight: 900; text-decoration: none; }
+        .main-nav ul { margin: 0; padding: 0; list-style: none; display: flex; }
+        .main-nav li { margin-left: 35px; }
+        .main-nav a { font-family: var(--body-font); font-weight: 700; text-decoration: none; color: white; font-size: 1.1em; padding: 8px 4px; position: relative; transition: color 0.3s; }
+        .main-nav a::after { content: ''; position: absolute; width: 0; height: 3px; display: block; margin-top: 5px; right: 0; background: var(--accent-yellow); transition: width .3s ease; }
+        .main-nav a:hover::after, .main-nav a.active::after { width: 100%; left: 0; }
+        .menu-toggle { display: none; cursor: pointer; z-index: 1001; }
+        .hamburger { width: 30px; height: 3px; background-color: white; position: relative; transition: all 0.3s ease; }
+        .hamburger::before, .hamburger::after { content: ''; position: absolute; width: 30px; height: 3px; background-color: white; transition: all 0.3s ease; }
+        .hamburger::before { top: -10px; }
+        .hamburger::after { top: 10px; }
+        @media (max-width: 900px) {
+            .main-nav { display: none; position: absolute; top: 100%; left: 0; width: 100%; background-color: var(--primary-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+            .main-nav.active { display: block; }
+            .main-nav ul { flex-direction: column; align-items: center; padding: 20px 0; }
+            .main-nav li { margin: 15px 0; }
+            .menu-toggle { display: block; }
+            .menu-toggle.active .hamburger { background-color: transparent; }
+            .menu-toggle.active .hamburger::before { transform: rotate(45deg); top: 0; }
+            .menu-toggle.active .hamburger::after { transform: rotate(-45deg); top: 0; }
+        }
+        @media (max-width: 768px) { .site-header { padding: 15px 20px; } .site-title { font-size: 2.2rem; } }
+
+        /* Page-specific styles */
+        .font-sans { font-family: var(--body-font); }
+        .section-title { font-weight: 800; color: #1e293b; }
+        .card { background-color: white; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); transition: all 0.3s ease-in-out; }
+        .card:hover { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); transform: translateY(-4px); }
+        .tab-button { transition: all 0.3s ease; border-bottom: 3px solid transparent; padding-bottom: 8px; margin-bottom: -1px; cursor: pointer; }
+        .tab-button.active { color: var(--primary-blue); border-bottom-color: var(--primary-blue); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .bg-hero { background-color: #0c4a6e; background-image: radial-gradient(at 0% 0%, hsla(204, 96%, 60%, 0.4) 0px, transparent 50%), radial-gradient(at 100% 100%, hsla(204, 96%, 60%, 0.4) 0px, transparent 50%); }
+        .quick-nav a { transition: all 0.2s ease-in-out; }
+        .quick-nav a:hover { background-color: #e2e8f0; }
+
+        .syllabus-item summary::-webkit-details-marker { display: none; }
+        .syllabus-item summary { list-style: none; cursor: pointer; position: relative; padding-right: 2rem;}
+        .syllabus-item summary:focus { outline: none; }
+        .syllabus-item summary .icon { position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); transition: transform 0.2s; }
+        .syllabus-item[open] summary .icon { transform: translateY(-50%) rotate(45deg); }
+        .syllabus-item[open] summary { background-color: #f1f5f9; }
+        
+        /* New Footer Styles */
+        .site-footer { background-color: var(--dark-blue); color: #e0f7fa; padding: 40px 20px; text-align: center; font-family: var(--body-font); }
+        .site-footer .container { max-width: 1200px; margin: 0 auto; }
+        .footer-title { font-family: var(--comic-font); font-size: 2rem; letter-spacing: 2px; color: white; margin-bottom: 20px; }
+        .footer-social-links { margin-bottom: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .footer-social-links a { color: white; text-decoration: none; font-size: 1.1rem; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background-color: var(--primary-blue); border-radius: 8px; transition: transform 0.2s, background-color 0.2s; }
+        .footer-social-links a:hover { background-color: var(--accent-yellow); color: var(--title-black); transform: translateY(-3px); }
+        .footer-social-links a .fab, .footer-social-links a .fas { font-size: 1.3rem; }
+        .footer-link-list { list-style: none; padding: 0; margin: 0 0 20px 0; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .footer-link-list a { color: #e0f7fa; text-decoration: none; font-weight: 700; transition: color 0.2s; }
+        .footer-link-list a:hover { color: var(--accent-yellow); text-decoration: underline; }
+        .copyright { color: #90a4ae; font-size: 0.9rem; }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <!-- Header -->
+    <header class="site-header">
+        <a href="index.html" class="site-title">VikPath</a>
+        <div class="menu-toggle"><div class="hamburger"></div></div>
+        <nav class="main-nav">
+             <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="bba.html" class="active">GGSIPU BBA</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <div class="bg-hero text-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">The Ultimate Guide to BBA (General)</h1>
+                <p class="mt-4 text-lg md:text-xl text-sky-200 max-w-3xl mx-auto font-sans">Guru Gobind Singh Indraprastha University, Delhi</p>
+                <p class="mt-2 text-md text-sky-300 max-w-3xl mx-auto font-sans">Your complete guide for the new NEP-based curriculum (w.e.f. 2024-25). Everything a student needs to know.</p>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            
+            <!-- Quick Navigation Section -->
+            <section class="mb-12">
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-4">Quick Navigation</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-sm font-semibold quick-nav">
+                        <a href="#overview" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-info-circle w-6 text-center text-blue-600 mr-2"></i>Overview</a>
+                        <a href="#structure" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-sitemap w-6 text-center text-blue-600 mr-2"></i>Programme Structure</a>
+                        <a href="#assessment" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-clipboard-check w-6 text-center text-blue-600 mr-2"></i>Assessment</a>
+                        <a href="#courses" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-book-open w-6 text-center text-blue-600 mr-2"></i>Semester Courses</a>
+                        <a href="#syllabus" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-list-alt w-6 text-center text-blue-600 mr-2"></i>Core Syllabus</a>
+                        <a href="#specialization-syllabus" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-star w-6 text-center text-blue-600 mr-2"></i>Specialization Syllabus</a>
+                        <a href="#training" class="block p-3 rounded-md bg-slate-100 text-slate-700"><i class="fas fa-industry w-6 text-center text-blue-600 mr-2"></i>Training & Internships</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Details Section -->
+            <section id="overview" class="mb-16">
+                 <h2 class="text-3xl section-title text-center mb-8">Programme at a Glance</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+                    <div class="card p-6"><div class="text-4xl text-blue-600 mb-3"><i class="fas fa-graduation-cap"></i></div><h3 class="font-semibold text-lg text-slate-800">Degree Options</h3><p class="text-slate-600 font-sans">3-Year <strong>Major</strong> or 4-Year Honours / Honours with Research</p></div>
+                    <div class="card p-6"><div class="text-4xl text-blue-600 mb-3"><i class="fas fa-cogs"></i></div><h3 class="font-semibold text-lg text-slate-800">Framework</h3><p class="text-slate-600 font-sans">Based on New Education Policy (NEP 2020)</p></div>
+                    <div class="card p-6"><div class="text-4xl text-blue-600 mb-3"><i class="fas fa-door-open"></i></div><h3 class="font-semibold text-lg text-slate-800">Flexibility</h3><p class="text-slate-600 font-sans">Multiple Entry and Exit Options</p></div>
+                </div>
+            </section>
+            
+            <!-- Programme Structure Section -->
+            <section id="structure" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">Programme Structure & Exit Options</h2>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <p class="text-center text-slate-600 mb-8 font-sans">The BBA programme is designed with flexibility, allowing you to exit at different stages with a credential or continue for an Honours degree.</p>
+                    <div class="space-y-6">
+                        <div class="card p-6 border-l-4 border-green-500">
+                            <h3 class="font-bold text-lg text-slate-800">After 1 Year: UG Certificate in Business Administration</h3>
+                            <p class="text-sm text-slate-600 font-sans mt-2">Earn a certificate by completing the first two semesters (a total of 47 credits).</p>
+                        </div>
+                        <div class="card p-6 border-l-4 border-yellow-500">
+                            <h3 class="font-bold text-lg text-slate-800">After 2 Years: UG Diploma in Business Administration</h3>
+                            <p class="text-sm text-slate-600 font-sans mt-2">Earn a diploma by completing the first four semesters (a total of 93 credits).</p>
+                        </div>
+                        <div class="card p-6 border-l-4 border-blue-500">
+                            <h3 class="font-bold text-lg text-slate-800">After 3 Years: BBA Degree</h3>
+                            <p class="text-sm text-slate-600 font-sans mt-2">Complete six semesters to earn a full BBA Degree. Credit requirements: <strong>136 credits</strong> for a Single <strong>Major</strong> or <strong>144 credits</strong> for a Double <strong>Major</strong>.</p>
+                        </div>
+                        <div class="card p-6 border-l-4 border-purple-500">
+                            <h3 class="font-bold text-lg text-slate-800">After 4 Years: BBA (Honours) / (Honours with Research)</h3>
+                            <p class="text-sm text-slate-600 font-sans mt-2">Complete all eight semesters to earn a BBA (Honours) (176 credits) or BBA (Honours with Research) (184 credits). A minimum of 75% aggregate marks till the 6th semester is required for the Research track.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Assessment Criteria -->
+            <section id="assessment" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">Assessment Criteria</h2>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <p class="text-center text-slate-600 mb-6 font-sans">All theory and practical courses are evaluated through a combination of internal and external assessments.</p>
+                    <div class="grid md:grid-cols-2 gap-8 text-center">
+                        <div class="card p-6 border-2 border-blue-200">
+                            <h3 class="text-2xl font-bold text-slate-800">Internal Assessment</h3>
+                            <p class="text-4xl font-extrabold text-blue-600 my-3">40 Marks</p>
+                            <ul class="text-slate-600 font-sans list-disc list-inside">
+                                <li>Class Test: 15 marks</li>
+                                <li>Assignments/Presentations/Viva/GD: 25 marks</li>
+                            </ul>
+                        </div>
+                        <div class="card p-6 border-2 border-slate-200">
+                            <h3 class="text-2xl font-bold text-slate-800">External Examination</h3>
+                            <p class="text-4xl font-extrabold text-slate-700 my-3">60 Marks</p>
+                             <p class="text-slate-500 font-sans">(University End-Term Examination)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Semester-wise Courses -->
+            <section id="courses" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">Semester-wise Course Layout</h2>
+                <div id="course-layout-tabs" class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="border-b border-gray-200 mb-6">
+                        <nav class="-mb-px flex space-x-4 sm:space-x-6 overflow-x-auto" aria-label="Tabs">
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="sem1">Sem 1</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="sem2">Sem 2</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="sem3">Sem 3</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="sem4">Sem 4</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="sem5">Sem 5</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="sem6">Sem 6</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="sem7">Sem 7</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="sem8">Sem 8</button>
+                        </nav>
+                    </div>
+                    <div id="sem1" class="tab-content"><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester I (24 Credits)</h3><ul class="space-y-2 text-slate-600 font-sans text-sm sm:text-base"><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 101:</strong> Management Process & Organizational Behaviour (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 103:</strong> Business Mathematics (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 105:</strong> Financial Accounting & Analysis (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 107:</strong> Business Economics (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 109:</strong> Entrepreneurial Mindset (2)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 111:</strong> Life Skills & Personality Development (2)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 113:</strong> IT Applications in Business (3)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 115:</strong> IT Applications in Business Lab (1)</li></ul></div>
+                    <div id="sem2" class="tab-content"><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester II (23 Credits)</h3><ul class="space-y-2 text-slate-600 font-sans text-sm sm:text-base"><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 102:</strong> Marketing Management (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 104:</strong> Decision Techniques for Business (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 106:</strong> Human Resource Management (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 108:</strong> Business Communication (2)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 110/118:</strong> MOOC or Indian Knowledge Systems (2)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 112:</strong> E-Commerce (2)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 114:</strong> E-Commerce Lab (1)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 116:</strong> Online/Inhouse Industrial Skill-Based Training (4)</li></ul></div>
+                    <div id="sem3" class="tab-content"><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester III (25 Credits)</h3><ul class="space-y-2 text-slate-600 font-sans text-sm sm:text-base"><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 201:</strong> Business Environment and Law (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 203:</strong> Production and Operations Management (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 205:</strong> Business Research Methodology (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong><strong>Major</strong> Elective-1</strong> (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>Minor Elective-1</strong> (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 217:</strong> NSS/NCC/Club Activities (2)</li><li class="p-3 bg-slate-50 rounded-md"><strong>Multi-Disciplinary Course</strong> (3)</li></ul></div>
+                    <div id="sem4" class="tab-content"><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester IV (21 Credits)</h3><ul class="space-y-2 text-slate-600 font-sans text-sm sm:text-base"><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 202:</strong> Cost & Management Accounting (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 204:</strong> Business Analytics (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong><strong>Major</strong> Elective-2</strong> (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>Minor Elective-2</strong> (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 206/218:</strong> MOOC or Sustainability Practices (2)</li><li class="p-3 bg-slate-50 rounded-md"><strong>Multi-Disciplinary Course</strong> (3)</li></ul></div>
+                    <div id="sem5" class="tab-content"><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester V (29 Credits)</h3><ul class="space-y-2 text-slate-600 font-sans text-sm sm:text-base"><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 301:</strong> Financial Management (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong><strong>Major</strong> Elective-3 & 4</strong> (4+4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>Minor Elective-3</strong> (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>Minor Elective-4 (for Double <strong>Major</strong>)</strong> (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 325:</strong> Information Systems Management Lab (2)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 327:</strong> Summer Training (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>Multi-Disciplinary Course</strong> (3)</li></ul></div>
+                    <div id="sem6" class="tab-content"><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester VI (22 Credits)</h3><ul class="space-y-2 text-slate-600 font-sans text-sm sm:text-base"><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 302:</strong> Business Policy and Strategy (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 304:</strong> Digital & Social Media Marketing (2)</li><li class="p-3 bg-slate-50 rounded-md"><strong><strong>Major</strong> Elective-5 & 6</strong> (4+4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>Minor Elective-5</strong> (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>Minor Elective-6 (for Double <strong>Major</strong>)</strong> (4)</li></ul></div>
+                    <div id="sem7" class="tab-content"><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester VII (20 Credits) - Honours</h3><ul class="space-y-2 text-slate-600 font-sans text-sm sm:text-base"><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 401:</strong> Project Management (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 403:</strong> Fundamentals of Actuarial Sciences (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong><strong>Major</strong> Elective-7 & 8</strong> (4+4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>Minor Elective-7</strong> (4)</li></ul></div>
+                    <div id="sem8" class="tab-content"><h3 class="font-bold text-xl text-slate-700 mb-4 border-l-4 border-blue-500 pl-3">Semester VIII (20 Credits) - Honours</h3><ul class="space-y-2 text-slate-600 font-sans text-sm sm:text-base"><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 402:</strong> Research Ethics and Writing (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>BBA 404:</strong> AI and ML in Business (4)</li><li class="p-3 bg-slate-50 rounded-md"><strong><strong>Major</strong> Elective-9, 10, & 11</strong> (4+4+4)</li><li class="p-3 bg-slate-50 rounded-md"><strong>For Honours with Research:</strong> BBA 412 Research Project/Dissertation (12 Credits)</li></ul></div>
+                </div>
+            </section>
+            
+<section id="syllabus" class="mb-16">
+                 <h2 class="text-3xl section-title text-center mb-12">Detailed Core Syllabus</h2>
+                <div id="core-syllabus-tabs" class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="border-b border-gray-200 mb-6">
+                        <nav class="-mb-px flex space-x-4 sm:space-x-6 overflow-x-auto" aria-label="Tabs">
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="syllabus-sem1">Sem 1</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="syllabus-sem2">Sem 2</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="syllabus-sem3">Sem 3</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="syllabus-sem4">Sem 4</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="syllabus-sem5">Sem 5</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="syllabus-sem6">Sem 6</button>
+                        </nav>
+                    </div>
+                    <div id="syllabus-sem1" class="tab-content">
+                        <div class="max-w-4xl mx-auto space-y-2 font-sans">
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 101: Management Process & Organizational Behaviour<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Management: Concept, Functions, Evolution of Management Thought, MBO.</p><p><strong>Unit II:</strong> Planning & Organizing: Types of Plans, Strategic Planning, Decision-making, Organizing Concepts, Authority, Delegation, Organization Structures.</p><p><strong>Unit III:</strong> Organizational Behavior: Personality, Learning, Perception, Values, Attitudes.</p><p><strong>Unit IV:</strong> Motivation & Leadership: Motivation, Leadership, Conflict, Power, Organizational Culture.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 103: Business Mathematics<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Principle of Counting, Progression, Functions.</p><p><strong>Unit II:</strong> Matrix Algebra, Determinants, Systems of Linear Equations, Input-Output Analysis.</p><p><strong>Unit III:</strong> Differential Calculus, Optimization, Maxima & Minima, Lagrangian Multipliers, Mathematics of Finance.</p><p><strong>Unit IV:</strong> Integral Calculus, Integration Techniques, Consumer/Producer Surplus, Probability.</p></div></details>
+                             <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 105: Financial Accounting and Analysis<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Meaning and Scope of Accounting, Principles and Standards (GAAP, IFRS, Ind AS).</p><p><strong>Unit II:</strong> Journalizing Transactions, Ledger Posting, Trial Balance, Company Final Accounts as per Schedule-III.</p><p><strong>Unit III:</strong> Depreciation, Provisions and Reserves, Contemporary Issues (Human Resource Accounting, Green Accounting).</p><p><strong>Unit IV:</strong> Shares and Share Capital, Issue of Debentures, Redemption of Debentures.</p></div></details>
+                             <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 107: Business Economics<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Business Economics, Consumer Behavior (Cardinal and Ordinal Utility).</p><p><strong>Unit II:</strong> Demand Analysis, Elasticity of Demand, Demand Forecasting, Theory of Production, Cost Analysis.</p><p><strong>Unit III:</strong> Price Output Decisions under Perfect Competition, Monopoly, Monopolistic Competition, Oligopoly.</p><p><strong>Unit IV:</strong> Concepts of Macro Economics, National Income concepts and measurement.</p></div></details>
+                             <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 109: Entrepreneurial Mindset<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Entrepreneurship, Theories, Characteristics, Myths, Mindset, Creativity, Innovation.</p><p><strong>Unit II:</strong> Promotion of a Venture, Opportunity Analysis, External Environment Analysis, Business Plan Writing.</p><p><strong>Unit III:</strong> Entrepreneurship Support, EDPs, Role of Government, Support Institutions (Central, State, etc.).</p><p><strong>Unit IV:</strong> Practicals including business plan presentation, startup case studies, and policy discussions.</p></div></details>
+                        </div>
+                    </div>
+                     <div id="syllabus-sem2" class="tab-content">
+                        <div class="max-w-4xl mx-auto space-y-2 font-sans">
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 102: Marketing Management<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Marketing, Marketing Environment, Consumer Decision Making, Segmentation, Targeting, Positioning.</p><p><strong>Unit II:</strong> Product Decisions, Branding, New Product Development, PLC, Pricing Decisions & Strategies.</p><p><strong>Unit III:</strong> Distribution Channels, Channel Management, Promotion Mix, IMC.</p><p><strong>Unit IV:</strong> Emerging Trends: Relationship Marketing, Sustainable Marketing, Green Marketing, Digital Marketing, AI in Marketing.</p></div></details>
+                             <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 104: Decision Techniques for Business<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Statistics fundamentals, Frequency Distribution, Measures of Central Tendency and Variation, Normal Distribution.</p><p><strong>Unit II:</strong> Correlation Analysis (Karl Pearson, Spearman's Rank), Regression Analysis (Ordinary Least Square).</p><p><strong>Unit III:</strong> Linear Programming: Formulation, Graphical and Simplex methods, Duality.</p><p><strong>Unit IV:</strong> Transportation and Assignment Problems: Initial Solution, Optimality Testing, Hungarian Method, Travelling Salesman Model.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 106: Human Resource Management<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to HRM: Nature, Scope, Functions and Importance. Evolution of HRM.</p><p><strong>Unit II:</strong> Human Resource Planning, Job Analysis, Job Design, Recruitment and Selection Process.</p><p><strong>Unit III:</strong> Training and Development, Performance Management and Appraisal Systems.</p><p><strong>Unit IV:</strong> Compensation Management, Employee Relations, Industrial Disputes, Trade Unions.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 108: Financial Management<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Financial Management, Goals, Financial Decisions, Time Value of Money.</p><p><strong>Unit II:</strong> Capital Budgeting: Techniques (Payback, NPV, IRR), Risk Analysis.</p><p><strong>Unit III:</strong> Cost of Capital, Capital Structure Theories, Leverage Analysis.</p><p><strong>Unit IV:</strong> Working Capital Management: Cash, Inventory, and Receivables Management.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 110: Business Communication<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Business Communication: Process, Principles (7Cs), Types, Barriers.</p><p><strong>Unit II:</strong> Written Communication: Business Letters, Memos, Reports, Proposals.</p><p><strong>Unit III:</strong> Oral Communication: Presentations, Meetings, Interviews, Group Discussions.</p><p><strong>Unit IV:</strong> Non-Verbal Communication, Cross-Cultural Communication, Technology in Communication.</p></div></details>
+                        </div>
+                    </div>
+                     <div id="syllabus-sem3" class="tab-content">
+                        <div class="max-w-4xl mx-auto space-y-2 font-sans">
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 201: Research Methodology<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Business Research, Research Process, Research Design.</p><p><strong>Unit II:</strong> Sources and Methods of Data Collection, Questionnaire Design, Sampling Techniques.</p><p><strong>Unit III:</strong> Data Analysis: Hypothesis Testing (t-test, chi-square), ANOVA.</p><p><strong>Unit IV:</strong> Report Writing and Presentation, Ethics in Business Research.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 203: Operations Management<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Operations Management, Operations Strategy, Process Design.</p><p><strong>Unit II:</strong> Facility Location and Layout, Capacity Planning.</p><p><strong>Unit III:</strong> Quality Management: TQM, Six Sigma, Statistical Quality Control.</p><p><strong>Unit IV:</strong> Supply Chain Management, Inventory Management Models (EOQ).</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 205: Corporate Accounting<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Accounting for Share Capital and Debentures - Advanced Issues.</p><p><strong>Unit II:</strong> Amalgamation, Absorption, and External Reconstruction of Companies.</p><p><strong>Unit III:</strong> Internal Reconstruction and Liquidation of Companies.</p><p><strong>Unit IV:</strong> Accounting for Holding Companies, Preparation of Consolidated Financial Statements.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 207: Legal and Regulatory Framework<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> The Indian Contract Act, 1872: Essential Elements, Performance, Breach.</p><p><strong>Unit II:</strong> The Sale of Goods Act, 1930: Contract of Sale, Conditions and Warranties.</p><p><strong>Unit III:</strong> The Companies Act, 2013: Nature of Company, Memorandum, Articles, Directors.</p><p><strong>Unit IV:</strong> The Consumer Protection Act, 2019; Introduction to Intellectual Property Rights.</p></div></details>
+                        </div>
+                    </div>
+                     <div id="syllabus-sem4" class="tab-content">
+                        <div class="max-w-4xl mx-auto space-y-2 font-sans">
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 202: International Business<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to International Business, Globalization, Modes of Entry.</p><p><strong>Unit II:</strong> International Trade Theories, Balance of Payments, WTO.</p><p><strong>Unit III:</strong> Foreign Exchange Market, Exchange Rate Determination.</p><p><strong>Unit IV:</strong> International Marketing, International HRM, Global Strategy.</p></div></details>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 204: Management Information Systems (MIS)<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to MIS, Role of IT in Business, System Concepts.</p><p><strong>Unit II:</strong> Information Systems in Functional Areas (Marketing, Finance, HR, Operations).</p><p><strong>Unit III:</strong> Enterprise Systems (ERP, SCM, CRM), Decision Support Systems (DSS).</p><p><strong>Unit IV:</strong> System Development Life Cycle (SDLC), IT Security and Ethical Challenges.</p></div></details>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 206: Cost and Management Accounting<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Cost & Management Accounting, Cost Concepts, Cost Sheet.</p><p><strong>Unit II:</strong> Marginal Costing and CVP Analysis, Budgeting and Budgetary Control.</p><p><strong>Unit III:</strong> Standard Costing and Variance Analysis.</p><p><strong>Unit IV:</strong> Decision Making: Make or Buy, Product Mix, Pricing Decisions.</p></div></details>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 208: Business Ethics & Corporate Governance<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Business Ethics, Ethical Theories, Ethical Dilemmas.</p><p><strong>Unit II:</strong> Corporate Social Responsibility (CSR): Concept, Models, and Stakeholder Theory.</p><p><strong>Unit III:</strong> Corporate Governance: Concepts, Theories, and Models.</p><p><strong>Unit IV:</strong> Role of Board of Directors, Committees (Audit, Nomination), Whistle-blower Policy.</p></div></details>
+                        </div>
+                    </div>
+                     <div id="syllabus-sem5" class="tab-content">
+                        <div class="max-w-4xl mx-auto space-y-2 font-sans">
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 301: Strategic Management<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Strategic Management, Vision, Mission, Objectives.</p><p><strong>Unit II:</strong> External Analysis (PESTEL, Porter's Five Forces), Internal Analysis (VRIO, SWOT).</p><p><strong>Unit III:</strong> Strategy Formulation: Business-Level and Corporate-Level Strategies.</p><p><strong>Unit IV:</strong> Strategy Implementation, Evaluation, and Control.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 303: Project Management<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Project Management, Project Life Cycle, Project Selection.</p><p><strong>Unit II:</strong> Project Planning, Work Breakdown Structure (WBS), Project Scheduling (PERT/CPM).</p><p><strong>Unit III:</strong> Project Cost Estimation, Resource Allocation, Risk Management.</p><p><strong>Unit IV:</strong> Project Monitoring and Control, Project Closure, Agile Project Management.</p></div></details>
+                            <p class="text-center font-bold text-slate-700 mt-6">--- Plus Specialization Elective I & II ---</p>
+                        </div>
+                    </div>
+                     <div id="syllabus-sem6" class="tab-content">
+                        <div class="max-w-4xl mx-auto space-y-2 font-sans">
+                             <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 302: Entrepreneurship Development<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Entrepreneurial Process, Business Idea Generation and Feasibility Analysis.</p><p><strong>Unit II:</strong> Preparing a Business Plan, Legal Forms of Business.</p><p><strong>Unit III:</strong> Sources of Finance: Venture Capital, Angel Investors, Crowdfunding.</p><p><strong>Unit IV:</strong> Managing Growth, Scaling Up, and Exit Strategies for Entrepreneurs.</p></div></details>
+                             <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 304: Final Project / Internship Report<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Objective:</strong> To provide students with hands-on experience in a business environment or to conduct an in-depth research project on a specific business problem.</p><p><strong>Components:</strong> Company/Industry Analysis, Problem Identification, Data Collection, Analysis, and Recommendations.</p><p><strong>Evaluation:</strong> Based on a written report and a viva-voce examination.</p></div></details>
+                            <p class="text-center font-bold text-slate-700 mt-6">--- Plus Specialization Elective III & IV ---</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="specialization-syllabus" class="mb-16">
+                 <h2 class="text-3xl section-title text-center mb-12">Detailed Syllabus for Specializations</h2>
+                 <div id="specialization-syllabus-tabs" class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="border-b border-gray-200 mb-6">
+                        <nav class="-mb-px flex space-x-4 sm:space-x-6 overflow-x-auto" aria-label="Tabs">
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="spec-fin">Finance</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="spec-hr">HRM</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="spec-mkt">Marketing</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="spec-ib">International Business</button>
+                            <button class="tab-button whitespace-nowrap py-4 px-1 text-sm sm:text-base font-semibold font-sans" data-tab="spec-ent">Entrepreneurship</button>
+                        </nav>
+                    </div>
+                    <div id="spec-fin" class="tab-content">
+                         <div class="max-w-4xl mx-auto space-y-2 font-sans">
+                            <h3 class="text-xl font-bold text-slate-600 mb-2">Finance Electives</h3>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 211: Security analysis and Portfolio Management<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Investment Basics, Risk-Return Framework, Fundamental Analysis (EIC Approach).</p><p><strong>Unit II:</strong> Equity Valuation Models (DDM, P/E), Technical Analysis Tools and Patterns.</p><p><strong>Unit III:</strong> Portfolio Analysis, Asset Allocation, Efficient Frontier, Portfolio Management Styles.</p><p><strong>Unit IV:</strong> Asset Pricing Models (CAPM, APT), Mutual Funds Types and Performance Evaluation.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 212: Income Tax Law & Practice<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Basic Concepts of Income Tax, Residential Status, Scope of Total Income, Exempted Incomes.</p><p><strong>Unit II:</strong> Income from Salary and House Property computation.</p><p><strong>Unit III:</strong> Profits and Gains from Business or Profession, Capital Gains, Income from Other Sources.</p><p><strong>Unit IV:</strong> Computation of Total Income, Tax Liability of an Individual, E-filing of ITR-1 and ITR-2.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 311: Financial Derivatives<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Derivatives, Forwards and Futures contracts, Pricing of Futures.</p><p><strong>Unit II:</strong> Options Contracts, Option Pricing Models (Binomial and Black-Scholes).</p><p><strong>Unit III:</strong> Options Trading Strategies: Spreads, Straddles, Strangles.</p><p><strong>Unit IV:</strong> Introduction to Swaps, Credit Derivatives, and Risk Management using Derivatives.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 312: International Financial Management<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Global Financial Environment, International Monetary System.</p><p><strong>Unit II:</strong> Foreign Exchange Risk Management: Transaction, Translation, Economic Exposure.</p><p><strong>Unit III:</strong> International Capital Budgeting and Cost of Capital.</p><p><strong>Unit IV:</strong> Multinational Working Capital Management, International Taxation.</p></div></details>
+                         </div>
+                    </div>
+                    <div id="spec-hr" class="tab-content">
+                         <div class="max-w-4xl mx-auto space-y-2 font-sans">
+                            <h3 class="text-xl font-bold text-slate-600 mb-2">HRM Electives</h3>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 207: Training and Development<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Training & Development, ISD Model, T&D Policies.</p><p><strong>Unit II:</strong> Training Need Analysis (TNA): Purpose, Levels, Approaches, and Methods.</p><p><strong>Unit III:</strong> Training Methodologies, Principles of Learning, Trainer Skills, E-Learning.</p><p><strong>Unit IV:</strong> Designing T&D Programs, Evaluation of Training, Competence-Based Training.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 307: Performance Management Systems<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Performance Management, Process, linkage with strategic planning.</p><p><strong>Unit II:</strong> Performance Appraisal Methods: Traditional and Modern, 360-degree Feedback.</p><p><strong>Unit III:</strong> Competency Mapping, Key Result Areas (KRAs), and Key Performance Indicators (KPIs).</p><p><strong>Unit IV:</strong> Feedback, Counseling, and Coaching, Linking Performance to Rewards.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 308: Industrial Relations and Labour Laws<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Industrial Relations, Approaches, Role of Trade Unions.</p><p><strong>Unit II:</strong> Collective Bargaining, Workers' Participation in Management.</p><p><strong>Unit III:</strong> Industrial Disputes: Causes and Settlement Machinery.</p><p><strong>Unit IV:</strong> Overview of Major Labour Laws: Factories Act, Industrial Disputes Act, Payment of Wages Act.</p></div></details>
+                            <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 309: Compensation Management<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Compensation, Components of Pay Structure.</p><p><strong>Unit II:</strong> Job Evaluation: Concept, Process, and Methods.</p><p><strong>Unit III:</strong> Wage and Salary Administration, Incentives and Fringe Benefits.</p><p><strong>Unit IV:</strong> Legal Aspects of Compensation, Executive Compensation.</p></div></details>
+                         </div>
+                    </div>
+                    <div id="spec-mkt" class="tab-content">
+                        <div class="max-w-4xl mx-auto space-y-2 font-sans">
+                           <h3 class="text-xl font-bold text-slate-600 mb-2">Marketing Electives</h3>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 305: Consumer Behaviour<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Consumer Behaviour, Models of Consumer Decision Making.</p><p><strong>Unit II:</strong> Psychological Influences: Motivation, Perception, Learning, Attitude.</p><p><strong>Unit III:</strong> Social and Cultural Influences: Family, Reference Groups, Social Class, Culture.</p><p><strong>Unit IV:</strong> Consumer Decision Process, Post-Purchase Behaviour, Organizational Buying Behaviour.</p></div></details>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 306: Sales and Distribution Management<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Sales Management, Personal Selling Process.</p><p><strong>Unit II:</strong> Sales Force Management: Recruitment, Training, Motivation, Compensation, and Evaluation.</p><p><strong>Unit III:</strong> Sales Forecasting, Sales Territories, and Quotas.</p><p><strong>Unit IV:</strong> Distribution Channel Management: Design, Selection, and Management of Channels, Retailing.</p></div></details>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 315: Digital Marketing<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Digital Marketing, Digital vs. Traditional Marketing.</p><p><strong>Unit II:</strong> SEO, SEM (PPC), Content Marketing.</p><p><strong>Unit III:</strong> Social Media Marketing (SMM), Email Marketing.</p><p><strong>Unit IV:</strong> Web Analytics, Mobile Marketing, Digital Marketing Strategy.</p></div></details>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 316: Services Marketing<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Services, Characteristics of Services, The Services Marketing Mix (7 Ps).</p><p><strong>Unit II:</strong> Consumer Behaviour in Services, Managing Customer Expectations.</p><p><strong>Unit III:</strong> Service Quality (SERVQUAL model), Service Recovery.</p><p><strong>Unit IV:</strong> Designing and Managing the Service Process, Managing Demand and Capacity.</p></div></details>
+                        </div>
+                   </div>
+                   <div id="spec-ib" class="tab-content">
+                        <div class="max-w-4xl mx-auto space-y-2 font-sans">
+                           <h3 class="text-xl font-bold text-slate-600 mb-2">International Business Electives</h3>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 317: Export-Import Procedures and Documentation<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Framework of India's Foreign Trade Policy, Export-Import Licensing.</p><p><strong>Unit II:</strong> Export Sales Contract, INCOTERMS, Methods of Payment in International Trade.</p><p><strong>Unit III:</strong> Export-Import Documentation: Commercial, Regulatory, and Transport Documents.</p><p><strong>Unit IV:</strong> Role of Customs, Shipping, and Insurance in Foreign Trade.</p></div></details>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 318: Global Business Strategy<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Global Strategy Concepts, Industry Globalization Drivers.</p><p><strong>Unit II:</strong> Framework for Global Strategy: Integration-Responsiveness Grid.</p><p><strong>Unit III:</strong> Global Market Entry Strategies, Alliances and Joint Ventures.</p><p><strong>Unit IV:</strong> Structuring and Managing a Multinational Enterprise.</p></div></details>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 319: Cross-Cultural Management<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Culture, Dimensions of Culture (Hofstede, Trompenaars).</p><p><strong>Unit II:</strong> Cross-Cultural Communication and Negotiation.</p><p><strong>Unit III:</strong> Managing Cultural Diversity in Teams.</p><p><strong>Unit IV:</strong> Leadership and Motivation across Cultures, Expatriate Management.</p></div></details>
+                        </div>
+                   </div>
+                   <div id="spec-ent" class="tab-content">
+                        <div class="max-w-4xl mx-auto space-y-2 font-sans">
+                           <h3 class="text-xl font-bold text-slate-600 mb-2">Entrepreneurship Electives</h3>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 321: Family Business Management<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Family Business, Strengths and Weaknesses.</p><p><strong>Unit II:</strong> Governance in Family Firms, Role of Family Councils and Constitutions.</p><p><strong>Unit III:</strong> Succession Planning and Leadership Transition.</p><p><strong>Unit IV:</strong> Conflict Management and Professionalization of Family Business.</p></div></details>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 322: Social Entrepreneurship<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Social Entrepreneurship, Creating Social Value.</p><p><strong>Unit II:</strong> Identifying Social Problems and Opportunities.</p><p><strong>Unit III:</strong> Sustainable Business Models for Social Ventures.</p><p><strong>Unit IV:</strong> Measuring Social Impact, Scaling Social Ventures.</p></div></details>
+                           <details class="syllabus-item bg-white p-4 rounded-lg shadow-sm group"><summary class="font-semibold text-lg text-slate-800 flex justify-between items-center">BBA 323: Venture Capital and Private Equity<span class="icon text-blue-500 text-xl"><i class="fas fa-plus"></i></span></summary><div class="mt-4 text-slate-600 text-sm space-y-2"><p><strong>Unit I:</strong> Introduction to Venture Capital and Private Equity, The Funding Lifecycle.</p><p><strong>Unit II:</strong> Deal Sourcing, Screening, and Due Diligence.</p><p><strong>Unit III:</strong> Valuation of New Ventures, Term Sheets and Deal Structuring.</p><p><strong>Unit IV:</strong> Post-Investment Management, Monitoring, and Exit Strategies.</p></div></details>
+                        </div>
+                   </div>
+                 </div>
+            </section>
+
+
+            <!-- Specializations -->
+            <section id="specializations" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">Areas of Specialization (<strong>Major</strong>/Minor)</h2>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <p class="text-center text-slate-600 mb-8 font-sans">Students can choose electives to specialize in up to two areas. A <strong>Major</strong> requires six papers from one area (24 credits), while a Minor requires four papers (16 credits). A Double <strong>Major</strong> is achieved by completing at least six electives from a second specialization.</p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 text-center">
+                        <div class="card p-4"><div class="text-3xl text-blue-600 mb-2"><i class="fas fa-chart-line"></i></div><h3 class="font-semibold text-slate-800">Finance</h3></div>
+                        <div class="card p-4"><div class="text-3xl text-blue-600 mb-2"><i class="fas fa-users-cog"></i></div><h3 class="font-semibold text-slate-800">Human Resource Management</h3></div>
+                        <div class="card p-4"><div class="text-3xl text-blue-600 mb-2"><i class="fas fa-bullhorn"></i></div><h3 class="font-semibold text-slate-800">Marketing</h3></div>
+                        <div class="card p-4"><div class="text-3xl text-blue-600 mb-2"><i class="fas fa-globe"></i></div><h3 class="font-semibold text-slate-800">International Business</h3></div>
+                        <div class="card p-4"><div class="text-3xl text-blue-600 mb-2"><i class="fas fa-lightbulb"></i></div><h3 class="font-semibold text-slate-800">Entrepreneurship Development</h3></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Training & Internships -->
+            <section id="training" class="mb-16">
+                <h2 class="text-3xl section-title text-center mb-8">Training & Internships</h2>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="space-y-6">
+                        <div class="card p-6 border-l-4 border-blue-500">
+                            <h3 class="font-bold text-lg text-slate-800 flex items-center"><i class="fas fa-tools mr-3"></i>BBA 116: Industrial Skill-Based Training (Semester II)</h3>
+                            <p class="text-sm text-slate-600 font-sans mt-2">A mandatory 4-credit course involving a minimum of 60 hours of training. This can be done in segments or as a continuous session, online or in-house, focusing on practical industry skills.</p>
+                        </div>
+                        <div class="card p-6 border-l-4 border-yellow-500">
+                            <h3 class="font-bold text-lg text-slate-800 flex items-center"><i class="fas fa-building mr-3"></i>BBA 327: Summer Training / Apprenticeship (After Semester IV)</h3>
+                            <p class="text-sm text-slate-600 font-sans mt-2">A mandatory eight-week summer training in an industry, research, or academic institute. A report and viva-voce will be evaluated in the fifth semester.</p>
+                        </div>
+                         <div class="card p-6 border-l-4 border-purple-500">
+                            <h3 class="font-bold text-lg text-slate-800 flex items-center"><i class="fas fa-microscope mr-3"></i>BBA 412: Research Project/Dissertation (Semester VIII)</h3>
+                            <p class="text-sm text-slate-600 font-sans mt-2">For students pursuing BBA (Honours with Research). This 12-credit project requires independent research, a detailed report, and a viva-voce. A publication in a reputed journal/conference is encouraged.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="site-footer">
+        <div class="container">
+            <h3 class="footer-title">Follow Us</h3>
+            <div class="footer-social-links">
+                <a href="https://t.me/VikPath" target="_blank"><i class="fab fa-telegram-plane"></i>Telegram Channel</a>
+                <a href="https://t.me/VikPathTalks" target="_blank"><i class="fas fa-users"></i>Telegram Group</a>
+            </div>
+            <ul class="footer-link-list">
+                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdvWfTELeL4oVDl8f6fFuruYHrKPEk-Cog7CQGGOK77zLnnsg/viewform" target="_blank">Contact Us</a></li>
+                <li><a href="https://vikpath.blogspot.com/p/about-us.html" target="_blank">About Us</a></li>
+                <li><a href="https://vikpath.blogspot.com/p/disclaimer.html" target="_blank">Disclaimer</a></li>
+                <li><a href="https://vikpath.blogspot.com/p/privacy-policy-vikpath.html" target="_blank">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">&copy; 2025 VikPath Community | All rights reserved.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Mobile Menu
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mainNav = document.querySelector('.main-nav');
+    if(menuToggle && mainNav) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mainNav.classList.toggle('active');
+        });
+    }
+
+    // Smooth scroll for on-page links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (document.querySelector(targetId)) {
+                e.preventDefault();
+                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                if (mainNav.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    mainNav.classList.remove('active');
+                }
+            }
+        });
+    });
+    
+    // Tab functionality for all tab groups
+    const tabGroups = document.querySelectorAll('[id$=\"-tabs\"]');
+    tabGroups.forEach(group => {
+        const tabs = group.querySelectorAll('.tab-button');
+        const tabContents = group.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Deactivate all tabs and content within this group
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+
+                // Activate the clicked tab and corresponding content
+                tab.classList.add('active');
+                const targetId = tab.getAttribute('data-tab');
+                const targetContent = group.querySelector('#' + targetId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+
+        // Activate the first tab in each group by default
+        if (tabs.length > 0) {
+            tabs[0].click();
+        }
+    });
+});
+</script>
+
+</body>
+</html>
+
